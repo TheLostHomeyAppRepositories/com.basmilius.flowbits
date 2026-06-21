@@ -75,3 +75,20 @@
 .item-icon {
     --size: 24px;
 }
+
+.item.loading::after {
+    content: '';
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgb(from currentColor r g b / .25);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: flowbits-spin 600ms linear infinite;
+}
+
+@keyframes flowbits-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

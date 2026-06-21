@@ -18,6 +18,7 @@
 
         let lastResult = null;
         let ready = false;
+        let busy = false;
 
         async function init() {
             Homey.on('flowbits-flags-update', update);
@@ -25,14 +26,31 @@
             await update();
         }
 
-        async function onClickFlag(flag) {
+        async function onClickFlag(flag, button) {
+            if (settings.readonly || busy) {
+                return;
+            }
+
+            busy = true;
+
             try {
                 Homey.hapticFeedback();
             } catch (_) {
                 // care
             }
 
-            await Homey.api('POST', '/', {flag: flag.name});
+            // Optimistically toggle this flag so a second tap doesn't flip it back.
+            button.classList.toggle('active');
+            button.classList.add('loading');
+
+            try {
+                await Homey.api('POST', '/', {flag: flag.name});
+                // Re-sync with the actual server state regardless of realtime timing.
+                await update();
+            } finally {
+                busy = false;
+                button.classList.remove('loading');
+            }
         }
 
         async function update() {
@@ -54,7 +72,7 @@
 
                 const button = document.createElement('button');
                 button.className = 'homey-widget item' + (result.active ? ' active' : '');
-                button.addEventListener('click', () => onClickFlag(result));
+                button.addEventListener('click', () => onClickFlag(result, button));
 
                 if (settings.show_icons && result.icon) {
                     const icon = document.createElement('div');

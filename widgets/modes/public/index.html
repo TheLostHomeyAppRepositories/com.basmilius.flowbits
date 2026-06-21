@@ -18,6 +18,7 @@
 
         let lastResult = null;
         let ready = false;
+        let busy = false;
 
         async function init() {
             Homey.on('flowbits-mode-update', update);
@@ -25,14 +26,37 @@
             await update();
         }
 
-        async function onClickMode(mode) {
+        async function onClickMode(mode, button) {
+            if (settings.readonly || busy) {
+                return;
+            }
+
+            busy = true;
+
             try {
                 Homey.hapticFeedback();
             } catch (_) {
                 // care
             }
 
-            await Homey.api('POST', '/', {mode: mode.name});
+            // Optimistically reflect the switch so a second tap doesn't toggle it back.
+            const wasActive = button.classList.contains('active');
+            document.querySelectorAll('#modes .item.active').forEach(el => el.classList.remove('active'));
+
+            if (!wasActive) {
+                button.classList.add('active');
+            }
+
+            button.classList.add('loading');
+
+            try {
+                await Homey.api('POST', '/', {mode: mode.name});
+                // Re-sync with the actual server state regardless of realtime timing.
+                await update();
+            } finally {
+                busy = false;
+                button.classList.remove('loading');
+            }
         }
 
         async function update() {
@@ -54,7 +78,7 @@
 
                 const button = document.createElement('button');
                 button.className = 'homey-widget item' + (result.active ? ' active' : '');
-                button.addEventListener('click', () => onClickMode(result));
+                button.addEventListener('click', () => onClickMode(result, button));
 
                 if (settings.show_icons && result.icon) {
                     const icon = document.createElement('div');

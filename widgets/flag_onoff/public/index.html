@@ -56,6 +56,7 @@
                     // care
                 }
 
+                // Optimistically toggle so a second tap doesn't flip it back.
                 if (power.classList.contains('on')) {
                     icon.classList.remove('on');
                     power.classList.remove('on');
@@ -64,9 +65,16 @@
                     power.classList.add('on');
                 }
 
-                await Homey.api('POST', '/', {flag});
+                power.classList.add('loading');
 
-                loading = false;
+                try {
+                    await Homey.api('POST', '/', {flag});
+                    // Re-sync with the actual server state regardless of realtime timing.
+                    await update();
+                } finally {
+                    loading = false;
+                    power.classList.remove('loading');
+                }
             });
         }
 

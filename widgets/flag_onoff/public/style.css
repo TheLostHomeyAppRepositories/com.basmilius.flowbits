@@ -56,3 +56,25 @@
 .flag-on-off-icon:not(.on) {
     --color: var(--homey-color-mono-200) !important;
 }
+
+.flag-on-off-power.loading {
+    /* Hide the power glyph (font icon) so only the spinner shows. */
+    font-size: 0;
+}
+
+.flag-on-off-power.loading::after {
+    content: '';
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(from currentColor r g b / .3);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: flowbits-spin 600ms linear infinite;
+}
+
+@keyframes flowbits-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
