@@ -1,10 +1,8 @@
 import { DateTime, Shortcuts } from '@basmilius/homey-common';
-import { REALTIME_TIMER_UPDATE, SETTING_TIMER_LOOKS, SETTING_TIMER_PREFIX } from '../const';
+import { MAX_TIMEOUT_MS, REALTIME_TIMER_UPDATE, SETTING_TIMER_LOOKS, SETTING_TIMER_PREFIX } from '../const';
 import { AutocompleteProviders, Triggers } from '../flow';
 import type { ClockState, ClockUnit, Feature, FlowBitsApp, Look, Styleable, Timer } from '../types';
 import { convertDurationToMs, slugify } from '../util';
-
-const TIMER_FINISH_GRACE_PERIOD = 5000;
 
 export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Timer>, Styleable {
     get looks(): Record<string, Look> {
@@ -16,7 +14,6 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
     }
 
     #timeouts: Record<string, NodeJS.Timeout[]> = {};
-    #timers: Record<string, StoredTimer> = {};
 
     async initialize(): Promise<void> {
         this.#migrateTimers();
@@ -123,7 +120,6 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
                 this.#triggerFinished(timer.name)
             ]);
 
-            await this.#schedule();
             return;
         }
 
@@ -139,7 +135,9 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
     async pause(name: string): Promise<void> {
         const timer = this.#find(name);
 
-        if (!timer) {
+        // Pausing anything but a running timer would recompute the remaining
+        // time from a target that is already frozen, shrinking it every call.
+        if (!timer || timer.status !== 'running') {
             return;
         }
 
@@ -159,7 +157,9 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
     async resume(name: string): Promise<void> {
         const timer = this.#find(name);
 
-        if (!timer) {
+        // Only a paused timer has a meaningful remainingMs; for a running one it
+        // still holds the full duration, which would restart it from the top.
+        if (!timer || timer.status !== 'paused') {
             return;
         }
 
@@ -271,7 +271,6 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
             return;
         }
 
-        this.#clear(timer);
         this.#remove(timer.id);
 
         this.log(`Stop timer ${timer.name}.`);
@@ -377,20 +376,60 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
         return `${SETTING_TIMER_PREFIX}${slugify(name)}`;
     }
 
-    #clear(timer: StoredTimer): void {
-        const timeouts = this.#timeouts[timer.id];
+    #clear(id: string): void {
+        const timeouts = this.#timeouts[id];
 
         if (!timeouts) {
             return;
         }
 
-        this.log(`Clear timer timeouts for ${timer.name}.`);
+        this.log(`Clear timer timeouts for ${id}.`);
         timeouts.forEach(timeout => this.clearTimeout(timeout));
-        delete this.#timeouts[timer.id];
+        delete this.#timeouts[id];
     }
 
     #find(name: string): StoredTimer | null {
-        return Object.values(this.#timers).find(t => t.name === name) ?? null;
+        const timer = this.#read(this.#id(name));
+
+        if (timer) {
+            return timer;
+        }
+
+        for (const setting of this.settings.getKeys()) {
+            if (!setting.startsWith(SETTING_TIMER_PREFIX)) {
+                continue;
+            }
+
+            const stored = this.#read(setting);
+
+            if (stored?.name === name) {
+                return stored;
+            }
+        }
+
+        return null;
+    }
+
+    #read(id: string): StoredTimer | null {
+        const timer: LegacyStoredTimer = this.settings.get(id);
+        const requiredKeys = ['name', 'duration', 'target', 'status'];
+        const isValid = timer && requiredKeys.every(key => key in timer) && ('remainingMs' in timer || 'remaining' in timer);
+
+        if (!isValid) {
+            return null;
+        }
+
+        return {
+            id,
+            name: timer.name,
+            duration: timer.duration,
+            // Legacy timers stored `remaining` in seconds.
+            remainingMs: timer.remainingMs ?? (timer.remaining ?? 0) * 1000,
+            target: timer.target,
+            status: timer.status,
+            repeating: timer.repeating ?? false,
+            randomBounds: timer.randomBounds
+        };
     }
 
     async #findAll(): Promise<StoredTimer[]> {
@@ -398,34 +437,22 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
         const autocompleteProvider = this.#autocompleteProvider();
         const definedTimers = await autocompleteProvider.find('');
         const timers: StoredTimer[] = [];
-        const requiredKeys = ['name', 'duration', 'target', 'status'];
 
         for (const setting of allSettings) {
             if (!setting.startsWith(SETTING_TIMER_PREFIX)) {
                 continue;
             }
 
-            const timer: LegacyStoredTimer = this.settings.get(setting);
-            const isValid = timer && requiredKeys.every(key => key in timer) && ('remainingMs' in timer || 'remaining' in timer);
+            const timer = this.#read(setting);
 
-            if (!isValid || !definedTimers.find(t => t.name === timer.name)) {
-                timer && this.#remove(timer.id);
+            // Keyed on the setting itself, so a record with a missing or stale
+            // `id` field still gets removed instead of lingering forever.
+            if (!timer || !definedTimers.find(t => t.name === timer.name)) {
+                this.#remove(setting);
                 continue;
             }
 
-            // Migrate legacy timers: `remaining` was in seconds, `remainingMs` is in milliseconds.
-            const remainingMs = timer.remainingMs ?? (timer.remaining ?? 0) * 1000;
-
-            timers.push({
-                id: setting,
-                name: timer.name,
-                duration: timer.duration,
-                remainingMs,
-                target: timer.target,
-                status: timer.status,
-                repeating: timer.repeating ?? false,
-                randomBounds: timer.randomBounds
-            });
+            timers.push(timer);
         }
 
         return timers;
@@ -433,7 +460,7 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
 
     #remove(id: string): void {
         this.settings.unset(id);
-        delete this.#timers[id];
+        this.#clear(id);
     }
 
     #save(name: string, duration: number, unit: ClockUnit, status: ClockState, repeating: boolean, randomBounds?: { min: number, max: number }): void {
@@ -445,59 +472,87 @@ export default class Timers extends Shortcuts<FlowBitsApp> implements Feature<Ti
     }
 
     async #schedule(): Promise<void> {
-        const now = DateTime.now().toMillis();
-        const timers = await this.#findAll();
+        let timers = await this.#findAll();
+        const expired = timers.filter(timer => timer.status === 'running' && timer.target <= DateTime.now().toMillis());
+
+        // Settle whatever already passed before planning. Without this a timer whose
+        // target went by while the app was down would stay 'running' forever, and a
+        // repeating one would stop repeating.
+        if (expired.length > 0) {
+            for (const timer of expired) {
+                await this.finish(timer);
+            }
+
+            timers = await this.#findAll();
+        }
+
         const remainingTriggers: { timer: { name: string }, duration: number, unit: ClockUnit }[] = await this.homey.flow
             .getTriggerCard('timer_remaining')
             .getArgumentValues()
             .catch(() => []);
 
-        this.#timers = {};
+        const now = DateTime.now().toMillis();
+        const known = new Set(timers.map(timer => timer.id));
 
+        for (const id of Object.keys(this.#timeouts)) {
+            if (!known.has(id)) {
+                this.#clear(id);
+            }
+        }
+
+        // Everything below is synchronous, so a concurrent schedule cannot interleave
+        // between clearing a timer's timeouts and planting the new ones.
         for (const timer of timers) {
-            this.#clear(timer);
+            this.#clear(timer.id);
 
             const diff = timer.target - now;
+
+            if (timer.status !== 'running' || diff <= 0) {
+                continue;
+            }
+
+            const timeouts: NodeJS.Timeout[] = [];
+            const delay = Math.min(diff, MAX_TIMEOUT_MS);
+
+            this.log(`Timer ${timer.name} is scheduled to finish in ${diff}ms.`);
+
+            timeouts.push(
+                this.setTimeout(async () => {
+                    delete this.#timeouts[timer.id];
+
+                    // A capped delay means the target is still ahead; the reschedule
+                    // below picks up the remainder instead of finishing early.
+                    if (delay === diff) {
+                        await this.finish(timer);
+                    }
+
+                    await this.#schedule();
+                }, delay)
+            );
+
             const triggers = remainingTriggers
                 .filter(t => t.timer.name === timer.name)
                 .filter((t, index, arr) => arr.findIndex(tt => tt.duration === t.duration && tt.unit === t.unit) === index);
 
-            if (diff > 0 && timer.status === 'running') {
-                this.log(`Timer ${timer.name} is scheduled to finish in ${diff}ms.`);
+            for (const trigger of triggers) {
+                const triggerDiff = diff - convertDurationToMs(trigger.duration, trigger.unit);
 
-                const timeouts: NodeJS.Timeout[] = [];
+                // Beyond the cap it is planted by the reschedule above, once it comes in range.
+                if (triggerDiff <= 0 || triggerDiff > MAX_TIMEOUT_MS) {
+                    continue;
+                }
 
                 timeouts.push(
                     this.setTimeout(async () => {
-                        await this.finish(timer);
-                        await this.#schedule();
-                    }, diff)
+                        await this.#triggerRemaining(timer.name, trigger.duration, trigger.unit);
+                    }, triggerDiff)
                 );
-
-                for (const trigger of triggers) {
-                    const triggerMs = convertDurationToMs(trigger.duration, trigger.unit);
-                    const triggerDiff = diff - triggerMs;
-
-                    if (triggerDiff <= 0) {
-                        continue;
-                    }
-
-                    timeouts.push(
-                        this.setTimeout(async () => {
-                            await this.#triggerRemaining(timer.name, trigger.duration, trigger.unit);
-                        }, triggerDiff)
-                    );
-                }
-
-                this.#timeouts[timer.id] = timeouts;
-            } else if (diff >= -TIMER_FINISH_GRACE_PERIOD && timer.status === 'running') {
-                // todo(Bas): Decide if this 5 second grace period is wanted.
-                await this.finish(timer);
             }
 
-            this.#timers[timer.id] = timer;
-            await this.#triggerRealtime(timer.name);
+            this.#timeouts[timer.id] = timeouts;
         }
+
+        await Promise.allSettled(timers.map(timer => this.#triggerRealtime(timer.name)));
     }
 
     #update(name: string, duration: number, remaining: number, target: number, status: ClockState, repeating: boolean, randomBounds?: { min: number, max: number }): void {
