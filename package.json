@@ -1,6 +1,7 @@
 {
     "name": "com.basmilius.flowbits",
     "version": "0.0.0",
+    "license": "MIT",
     "scripts": {
         "build": "tsc",
         "docs:dev": "vitepress dev docs",
