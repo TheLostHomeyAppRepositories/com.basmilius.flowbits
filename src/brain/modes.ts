@@ -179,10 +179,17 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
             await this.#triggerDeactivated(current);
         }
 
-        await Promise.allSettled([
+        const triggers = [
+            this.#triggerCurrentChanged(name),
             this.#triggerActivated(name),
             this.#triggerChanged(name, true)
-        ]);
+        ];
+
+        if (current !== null) {
+            triggers.push(this.#triggerChanged(current, false));
+        }
+
+        await Promise.allSettled(triggers);
     }
 
     async deactivate(name: string): Promise<void> {
@@ -205,7 +212,8 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         await Promise.allSettled([
             this.#triggerRealtime(),
             this.#triggerDeactivated(name),
-            this.#triggerChanged(name, false)
+            this.#triggerChanged(name, false),
+            this.#triggerCurrentChanged(null)
         ]);
     }
 
@@ -227,7 +235,8 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         await Promise.allSettled([
             this.#triggerRealtime(),
             this.#triggerActivated(name),
-            this.#triggerChanged(name, true)
+            this.#triggerChanged(name, true),
+            this.#triggerCurrentChanged(name)
         ]);
     }
 
@@ -422,8 +431,11 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
     }
 
     async #triggerChanged(name: string, active: boolean): Promise<void> {
-        await this.registry.fireTrigger(Triggers.ModeCurrentChanged, {}, {mode: active ? name : '-'});
         await this.registry.fireTrigger(Triggers.ModeChanged, {name}, {active});
+    }
+
+    async #triggerCurrentChanged(name: string | null): Promise<void> {
+        await this.registry.fireTrigger(Triggers.ModeCurrentChanged, {}, {mode: name ?? '-'});
     }
 
     async #triggerDeactivated(name: string): Promise<void> {
