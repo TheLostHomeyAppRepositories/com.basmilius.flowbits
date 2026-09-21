@@ -289,6 +289,10 @@
       "method": "GET",
       "path": "/modes"
     },
+    "getModeGroups": {
+      "method": "GET",
+      "path": "/mode-groups"
+    },
     "getNoRepeatWindows": {
       "method": "GET",
       "path": "/no-repeat-windows"
@@ -1727,6 +1731,381 @@
           "ar": "يتم تحفيزه عندما يتم تعطيل الوضع."
         },
         "args": [
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_activated",
+        "title": {
+          "en": "Mode activated in group",
+          "nl": "Stand geactiveerd in groep",
+          "de": "Modus aktiviert in Gruppe",
+          "fr": "Mode activé dans un groupe",
+          "it": "Modalità attivata in un gruppo",
+          "sv": "Läge aktiverat i grupp",
+          "no": "Modus aktivert i gruppe",
+          "es": "Modo activado en un grupo",
+          "da": "Tilstand aktiveret i gruppe",
+          "ru": "Режим активирован в группе",
+          "pl": "Tryb aktywowany w grupie",
+          "ko": "그룹에서 모드 활성화됨",
+          "ar": "تم تفعيل الوضع في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] is activated in [[group]]",
+          "nl": "Stand [[name]] is geactiveerd in [[group]]",
+          "de": "Modus [[name]] ist aktiviert in [[group]]",
+          "fr": "Mode [[name]] est activé dans [[group]]",
+          "it": "Modalità [[name]] è attivata in [[group]]",
+          "sv": "Läge [[name]] är aktiverat i [[group]]",
+          "no": "Modus [[name]] er aktivert i [[group]]",
+          "es": "Modo [[name]] está activado en [[group]]",
+          "da": "Tilstand [[name]] er aktiveret i [[group]]",
+          "ru": "Режим [[name]] активирован в [[group]]",
+          "pl": "Tryb [[name]] został aktywowany w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]가 활성화됨",
+          "ar": "تم تفعيل وضع [[name]] في [[group]]"
+        },
+        "hint": {
+          "en": "Triggers when a mode gets activated. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Triggert wanneer een stand is geactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Löst aus, wenn ein Modus aktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Se déclenche lorsqu’un mode est activé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Si attiva quando una modalità viene attivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Utlöses när ett läge aktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Utløses når en modus aktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Se activa cuando un modo se activa. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Udløses når en tilstand aktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Срабатывает при активации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Wyzwalane, gdy tryb zostaje aktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتم التفعيل عند تفعيل الوضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_changed",
+        "title": {
+          "en": "Mode changed in group",
+          "nl": "Stand gewijzigd in groep",
+          "de": "Modus geändert in Gruppe",
+          "fr": "Mode changé dans un groupe",
+          "it": "Modalità modificata in un gruppo",
+          "sv": "Läge ändrat i grupp",
+          "no": "Modus endret i gruppe",
+          "es": "Modo cambiado en un grupo",
+          "da": "Tilstand ændret i gruppe",
+          "ru": "Режим изменён в группе",
+          "pl": "Tryb zmieniony w grupie",
+          "ko": "그룹에서 모드 변경됨",
+          "ar": "الوضع تغيّر في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] changed in [[group]]",
+          "nl": "Stand [[name]] gewijzigd in [[group]]",
+          "de": "Modus [[name]] geändert in [[group]]",
+          "fr": "Mode [[name]] changé dans [[group]]",
+          "it": "Modalità [[name]] modificata in [[group]]",
+          "sv": "Läge [[name]] ändrat i [[group]]",
+          "no": "Modus [[name]] endret i [[group]]",
+          "es": "Modo [[name]] cambiado en [[group]]",
+          "da": "Tilstand [[name]] ændret i [[group]]",
+          "ru": "Режим [[name]] изменён в [[group]]",
+          "pl": "Tryb [[name]] zmieniony w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]] 변경됨",
+          "ar": "الوضع [[name]] تغيّر في [[group]]"
+        },
+        "hint": {
+          "en": "Triggers when a mode is activated or deactivated. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Triggert wanneer een stand wordt geactiveerd of gedeactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Löst aus, wenn ein Modus aktiviert oder deaktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Se déclenche lorsqu’un mode est activé ou désactivé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Si attiva quando una modalità viene attivata o disattivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Utlöses när ett läge aktiveras eller deaktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Utløses når en modus aktiveres eller deaktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Se activa cuando un modo se activa o desactiva. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Udløses når en tilstand aktiveres eller deaktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Срабатывает при активации или деактивации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Wyzwalane, gdy tryb zostaje aktywowany lub dezaktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 활성화되거나 비활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتم التفعيل عند تفعيل أو إلغاء تفعيل وضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "active",
+            "type": "boolean",
+            "title": {
+              "en": "Active",
+              "nl": "Actief",
+              "de": "Aktiv",
+              "fr": "Actif",
+              "it": "Attivo",
+              "sv": "Aktiv",
+              "no": "Aktiv",
+              "es": "Activo",
+              "da": "Aktiv",
+              "ru": "Активный",
+              "pl": "Aktywny",
+              "ko": "활성",
+              "ar": "نشط"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_current_changed",
+        "title": {
+          "en": "The current mode changed in group",
+          "nl": "De huidige stand is gewijzigd in groep",
+          "de": "Der aktuelle Modus wurde geändert in Gruppe",
+          "fr": "Le mode actuel a changé dans un groupe",
+          "it": "La modalità attuale è cambiata in un gruppo",
+          "sv": "Det aktuella läget har ändrats i grupp",
+          "no": "Den nåværende modusen har endret seg i gruppe",
+          "es": "El modo actual ha cambiado en un grupo",
+          "da": "Den nuværende tilstand er blevet ændret i gruppe",
+          "ru": "Текущий режим был изменён в группе",
+          "pl": "Aktualny tryb został zmieniony w grupie",
+          "ko": "그룹에서 현재 모드가 변경되었습니다",
+          "ar": "تم تغيير الوضع الحالي في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "The current mode changed in [[group]]",
+          "nl": "De huidige stand is gewijzigd in [[group]]",
+          "de": "Der aktuelle Modus wurde geändert in [[group]]",
+          "fr": "Le mode actuel a changé dans [[group]]",
+          "it": "La modalità attuale è cambiata in [[group]]",
+          "sv": "Det aktuella läget har ändrats i [[group]]",
+          "no": "Den nåværende modusen har endret seg i [[group]]",
+          "es": "El modo actual ha cambiado en [[group]]",
+          "da": "Den nuværende tilstand er blevet ændret i [[group]]",
+          "ru": "Текущий режим был изменён в [[group]]",
+          "pl": "Aktualny tryb został zmieniony w [[group]]",
+          "ko": "[[group]]에서 현재 모드가 변경되었습니다",
+          "ar": "تم تغيير الوضع الحالي في [[group]]"
+        },
+        "hint": {
+          "en": "Triggers when the current mode is changed. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Triggert wanneer de huidige stand is gewijzigd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Wird ausgelöst, wenn der aktuelle Modus geändert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Se déclenche lorsque le mode actuel est modifié. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Attiva quando la modalità attuale viene modificata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Utlöses när det aktuella läget ändras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Utløses når den nåværende modusen endres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Se activa cuando el modo actual cambia. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Udløses, når den nuværende tilstand ændres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Срабатывает, когда текущий режим изменяется. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Wyzwalane, gdy aktualny tryb zostaje zmieniony. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "현재 모드가 변경될 때 트리거됩니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتم تشغيله عند تغيير الوضع الحالي. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_deactivated",
+        "title": {
+          "en": "Mode deactivated in group",
+          "nl": "Stand gedeactiveerd in groep",
+          "de": "Modus deaktiviert in Gruppe",
+          "fr": "Mode désactivé dans un groupe",
+          "it": "Modalità disattivata in un gruppo",
+          "sv": "Läge inaktiverat i grupp",
+          "no": "Modus deaktivert i gruppe",
+          "es": "Modo desactivado en un grupo",
+          "da": "Tilstand deaktiveret i gruppe",
+          "ru": "Режим деактивирован в группе",
+          "pl": "Tryb dezaktywowany w grupie",
+          "ko": "그룹에서 모드 비활성화됨",
+          "ar": "الوضع الصامت في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] is deactivated in [[group]]",
+          "nl": "Stand [[name]] is gedeactiveerd in [[group]]",
+          "de": "Modus [[name]] ist deaktiviert in [[group]]",
+          "fr": "Mode [[name]] est désactivé dans [[group]]",
+          "it": "Modalità [[name]] è disattivato in [[group]]",
+          "sv": "Läge [[name]] är inaktiverat i [[group]]",
+          "no": "Modus [[name]] er deaktivert i [[group]]",
+          "es": "Modo [[name]] está desactivado en [[group]]",
+          "da": "Tilstand [[name]] er deaktiveret i [[group]]",
+          "ru": "Режим [[name]] деактивирован в [[group]]",
+          "pl": "Tryb [[name]] jest dezaktywowany w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]] 비활성화됨",
+          "ar": "الوضع [[name]] معطل في [[group]]"
+        },
+        "hint": {
+          "en": "Triggers when a mode gets deactivated. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Triggert wanneer een stand is gedeactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Löst aus, wenn ein Modus deaktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Se déclenche lorsqu’un mode est désactivé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Si attiva quando una modalità viene disattivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Utlöses när ett läge inaktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Utløses når en modus deaktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Se activa cuando un modo se desactiva. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Udløses når en tilstand deaktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Срабатывает при деактивации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Wyzwalane, gdy tryb zostaje dezaktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 비활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتم تحفيزه عندما يتم تعطيل الوضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
           {
             "type": "autocomplete",
             "name": "name",
@@ -4862,6 +5241,633 @@
           "ko": "현재 활성화된 모드가 있는지 확인합니다.",
           "ar": "يتحقق مما إذا كان هناك وضع نشط حاليًا."
         }
+      },
+      {
+        "id": "mode_group_active",
+        "title": {
+          "en": "Any mode is active in group",
+          "nl": "Een stand is actief in groep",
+          "de": "Ein Modus ist aktiv in Gruppe",
+          "fr": "Un mode est actif dans un groupe",
+          "it": "Una modalità è attiva in un gruppo",
+          "sv": "Ett läge är aktivt i grupp",
+          "no": "En modus er aktiv i gruppe",
+          "es": "Algún modo está activo en un grupo",
+          "da": "En tilstand er aktiv i gruppe",
+          "ru": "Какой-либо режим активен в группе",
+          "pl": "Jakiś tryb jest aktywny w grupie",
+          "ko": "그룹에서 활성화된 모드 있음",
+          "ar": "يوجد وضع نشط في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "!{{Any mode is active|No mode is active}} in [[group]]",
+          "nl": "!{{Een stand is actief|Geen stand is actief}} in [[group]]",
+          "de": "!{{Ein Modus ist aktiv|Kein Modus ist aktiv}} in [[group]]",
+          "fr": "!{{Un mode est actif|Aucun mode n'est actif}} dans [[group]]",
+          "it": "!{{Una modalità è attiva|Nessuna modalità è attiva}} in [[group]]",
+          "sv": "!{{Ett läge är aktivt|Inget läge är aktivt}} i [[group]]",
+          "no": "!{{En modus er aktiv|Ingen modus er aktiv}} i [[group]]",
+          "es": "!{{Algún modo está activo|Ningún modo está activo}} en [[group]]",
+          "da": "!{{En tilstand er aktiv|Ingen tilstand er aktiv}} i [[group]]",
+          "ru": "!{{Какой-либо режим активен|Ни один режим не активен}} в [[group]]",
+          "pl": "!{{Jakiś tryb jest aktywny|Żaden tryb nie jest aktywny}} w [[group]]",
+          "ko": "[[group]]에서 !{{활성화된 모드 있음|활성화된 모드 없음}}",
+          "ar": "!{{يوجد وضع نشط|لا يوجد وضع نشط}} في [[group]]"
+        },
+        "hint": {
+          "en": "Checks if any mode is currently active. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Controleert of er een stand actief is. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Prüft, ob ein Modus aktiv ist. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Vérifie si un mode est actuellement actif. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Verifica se una modalità è attualmente attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Kontrollerar om ett läge är aktivt. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Sjekker om en modus er aktiv. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Comprueba si algún modo está activo. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Kontrollerer om en tilstand er aktiv. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Проверяет, активен ли какой-либо режим. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Sprawdza, czy jakiś tryb jest aktywny. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "현재 활성화된 모드가 있는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتحقق مما إذا كان هناك وضع نشط حاليًا. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_is",
+        "title": {
+          "en": "Mode is active in group",
+          "nl": "Stand is actief in groep",
+          "de": "Modus ist aktiv in Gruppe",
+          "fr": "Le mode est actif dans un groupe",
+          "it": "La modalità è attiva in un gruppo",
+          "sv": "Läget är aktivt i grupp",
+          "no": "Modus er aktiv i gruppe",
+          "es": "El modo está activo en un grupo",
+          "da": "Tilstand er aktiv i gruppe",
+          "ru": "Режим активен в группе",
+          "pl": "Tryb jest aktywny w grupie",
+          "ko": "그룹에서 모드가 활성화됨",
+          "ar": "الوضع نشط في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] is !{{active|inactive}} in [[group]]",
+          "nl": "Stand [[name]] is !{{actief|inactief}} in [[group]]",
+          "de": "Modus [[name]] ist !{{aktiv|inaktiv}} in [[group]]",
+          "fr": "Mode [[name]] est !{{actif|inactif}} dans [[group]]",
+          "it": "Modalità [[name]] è !{{attivo|inattivo}} in [[group]]",
+          "sv": "Läge [[name]] är !{{aktiv|inaktiv}} i [[group]]",
+          "no": "Modus [[name]] er !{{aktiv|inaktiv}} i [[group]]",
+          "es": "Modo [[name]] está !{{activo|inactivo}} en [[group]]",
+          "da": "Tilstand [[name]] er !{{aktiv|inaktiv}} i [[group]]",
+          "ru": "Режим [[name]] !{{активен|неактивен}} в [[group]]",
+          "pl": "Tryb [[name]] jest !{{aktywny|nieaktywny}} w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]는 !{{활성|비활성}} 상태입니다",
+          "ar": "الوضع [[name]] هو !{{نشط|غير نشط}} في [[group]]"
+        },
+        "hint": {
+          "en": "Checks if a mode is activated. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Controleert of een stand is geactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Prüft, ob ein Modus aktiviert ist. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Vérifie si un mode est activé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Verifica se una modalità è attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Kontrollerar om ett läge är aktiverat. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Sjekker om en modus er aktivert. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Comprueba si un modo está activado. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Kontrollerer om en tilstand er aktiveret. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Проверяет, активирован ли режим. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Sprawdza, czy tryb jest aktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 활성화되었는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتحقق مما إذا كان الوضع نشطًا. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "الوضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_is_active_for",
+        "title": {
+          "en": "Mode is active for !{{at least|less than}} in group",
+          "nl": "Stand is actief voor !{{tenminste|minder dan}} in groep",
+          "de": "Modus ist aktiv seit !{{mindestens|weniger als}} in Gruppe",
+          "fr": "Le mode est actif depuis !{{au moins|moins de}} dans un groupe",
+          "it": "La modalità è attiva da !{{almeno|meno di}} in un gruppo",
+          "sv": "Läget är aktivt i !{{minst|mindre än}} i grupp",
+          "no": "Modusen er aktiv i !{{minst|mindre enn}} i gruppe",
+          "es": "El modo está activo durante !{{al menos|menos de}} en un grupo",
+          "da": "Tilstanden er aktiv i !{{mindst|mindre end}} i gruppe",
+          "ru": "Режим активен !{{как минимум|менее}} в группе",
+          "pl": "Tryb jest aktywny przez !{{co najmniej|mniej niż}} w grupie",
+          "ko": "그룹에서 모드가 !{{최소|미만}} 활성 상태입니다",
+          "ar": "الوضع نشط لمدة !{{على الأقل|أقل من}} في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] is active for !{{at least|less than}} [[duration]] [[unit]] in [[group]]",
+          "nl": "Stand [[name]] is actief voor !{{tenminste|minder dan}} [[duration]] [[unit]] in [[group]]",
+          "de": "Modus [[name]] ist aktiv seit !{{mindestens|weniger als}} [[duration]] [[unit]] in [[group]]",
+          "fr": "Le mode [[name]] est actif depuis !{{au moins|moins de}} [[duration]] [[unit]] dans [[group]]",
+          "it": "La modalità [[name]] è attiva da !{{almeno|meno di}} [[duration]] [[unit]] in [[group]]",
+          "sv": "Läget [[name]] är aktivt i !{{minst|mindre än}} [[duration]] [[unit]] i [[group]]",
+          "no": "Modusen [[name]] er aktiv i !{{minst|mindre enn}} [[duration]] [[unit]] i [[group]]",
+          "es": "El modo [[name]] está activo durante !{{al menos|menos de}} [[duration]] [[unit]] en [[group]]",
+          "da": "Tilstanden [[name]] er aktiv i !{{mindst|mindre end}} [[duration]] [[unit]] i [[group]]",
+          "ru": "Режим [[name]] активен !{{как минимум|менее}} [[duration]] [[unit]] в [[group]]",
+          "pl": "Tryb [[name]] jest aktywny przez !{{co najmniej|mniej niż}} [[duration]] [[unit]] w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]가 !{{최소|미만}} [[duration]] [[unit]] 동안 활성 상태입니다",
+          "ar": "الوضع [[name]] نشط لمدة !{{على الأقل|أقل من}} [[duration]] [[unit]] في [[group]]"
+        },
+        "hint": {
+          "en": "Checks if a mode has been active for at least the specified duration. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Controleert of een stand minstens de opgegeven duur actief is geweest. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Prüft, ob ein Modus mindestens die angegebene Dauer aktiv war. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Vérifie si un mode a été actif pendant au moins la durée spécifiée. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Verifica se una modalità è stata attiva per almeno la durata specificata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Kontrollerar om ett läge har varit aktivt i minst den angivna varaktigheten. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Sjekker om en modus har vært aktiv i minst den angitte varigheten. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Comprueba si un modo ha estado activo durante al menos la duración especificada. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Kontrollerer om en tilstand har været aktiv i mindst den angivne varighed. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Проверяет, был ли режим активен как минимум в течение указанной продолжительности. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Sprawdza, czy tryb był aktywny przez co najmniej określony czas. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 지정된 기간 이상 활성 상태였는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتحقق مما إذا كان الوضع نشطاً لمدة على الأقل المدة المحددة. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          },
+          {
+            "type": "number",
+            "name": "duration",
+            "min": 1,
+            "step": 1,
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "de": "Dauer",
+              "fr": "Durée",
+              "it": "Durata",
+              "sv": "Varaktighet",
+              "no": "Varighet",
+              "es": "Duración",
+              "da": "Varighed",
+              "ru": "Длительность",
+              "pl": "Czas trwania",
+              "ko": "지속 시간",
+              "ar": "المدة"
+            },
+            "placeholder": {
+              "en": "E.g. 10",
+              "nl": "Bijv. 10",
+              "de": "Z. B. 10",
+              "fr": "P. ex. 10",
+              "it": "Es. 10",
+              "sv": "T.ex. 10",
+              "no": "F.eks. 10",
+              "es": "P. ej. 10",
+              "da": "F.eks. 10",
+              "ru": "Напр. 10",
+              "pl": "Np. 10",
+              "ko": "예: 10",
+              "ar": "مثال: 10"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "de": "Einheit",
+              "fr": "Unité",
+              "it": "Unità",
+              "sv": "Enhet",
+              "no": "Enhet",
+              "es": "Unidad",
+              "da": "Enhed",
+              "ru": "Единица",
+              "pl": "Jednostka",
+              "ko": "단위",
+              "ar": "الوحدة"
+            },
+            "values": [
+              {
+                "id": "milliseconds",
+                "title": {
+                  "en": "milliseconds",
+                  "nl": "milliseconden",
+                  "de": "Millisekunden",
+                  "fr": "millisecondes",
+                  "it": "millisecondi",
+                  "sv": "millisekunder",
+                  "no": "millisekunder",
+                  "es": "milisegundos",
+                  "da": "millisekunder",
+                  "ru": "миллисекунды",
+                  "pl": "milisekundy",
+                  "ko": "밀리초",
+                  "ar": "ميلي ثانية"
+                }
+              },
+              {
+                "id": "seconds",
+                "title": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "de": "Sekunden",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "sv": "sekunder",
+                  "no": "sekunder",
+                  "es": "segundos",
+                  "da": "sekunder",
+                  "ru": "секунды",
+                  "pl": "sekundy",
+                  "ko": "초",
+                  "ar": "ثوانٍ"
+                }
+              },
+              {
+                "id": "minutes",
+                "title": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "de": "Minuten",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "sv": "minuter",
+                  "no": "minutter",
+                  "es": "minutos",
+                  "da": "minutter",
+                  "ru": "минуты",
+                  "pl": "minuty",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "title": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "de": "Stunden",
+                  "fr": "heures",
+                  "it": "ore",
+                  "sv": "timmar",
+                  "no": "timer",
+                  "es": "horas",
+                  "da": "timer",
+                  "ru": "часы",
+                  "pl": "godziny",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "title": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "de": "Tage",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "sv": "dagar",
+                  "no": "dager",
+                  "es": "días",
+                  "da": "dage",
+                  "ru": "дни",
+                  "pl": "dni",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "mode_group_is_inactive_for",
+        "title": {
+          "en": "Mode is inactive for !{{at least|less than}} in group",
+          "nl": "Stand is inactief voor !{{tenminste|minder dan}} in groep",
+          "de": "Modus ist inaktiv seit !{{mindestens|weniger als}} in Gruppe",
+          "fr": "Le mode est inactif depuis !{{au moins|moins de}} dans un groupe",
+          "it": "La modalità è inattiva da !{{almeno|meno di}} in un gruppo",
+          "sv": "Läget är inaktivt i !{{minst|mindre än}} i grupp",
+          "no": "Modusen er inaktiv i !{{minst|mindre enn}} i gruppe",
+          "es": "El modo está inactivo durante !{{al menos|menos de}} en un grupo",
+          "da": "Tilstanden er inaktiv i !{{mindst|mindre end}} i gruppe",
+          "ru": "Режим неактивен !{{как минимум|менее}} в группе",
+          "pl": "Tryb jest nieaktywny przez !{{co najmniej|mniej niż}} w grupie",
+          "ko": "그룹에서 모드가 !{{최소|미만}} 비활성 상태입니다",
+          "ar": "الوضع غير نشط لمدة !{{على الأقل|أقل من}} في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Mode [[name]] is inactive for !{{at least|less than}} [[duration]] [[unit]] in [[group]]",
+          "nl": "Stand [[name]] is inactief voor !{{tenminste|minder dan}} [[duration]] [[unit]] in [[group]]",
+          "de": "Modus [[name]] ist inaktiv seit !{{mindestens|weniger als}} [[duration]] [[unit]] in [[group]]",
+          "fr": "Le mode [[name]] est inactif depuis !{{au moins|moins de}} [[duration]] [[unit]] dans [[group]]",
+          "it": "La modalità [[name]] è inattiva da !{{almeno|meno di}} [[duration]] [[unit]] in [[group]]",
+          "sv": "Läget [[name]] är inaktivt i !{{minst|mindre än}} [[duration]] [[unit]] i [[group]]",
+          "no": "Modusen [[name]] er inaktiv i !{{minst|mindre enn}} [[duration]] [[unit]] i [[group]]",
+          "es": "El modo [[name]] está inactivo durante !{{al menos|menos de}} [[duration]] [[unit]] en [[group]]",
+          "da": "Tilstanden [[name]] er inaktiv i !{{mindst|mindre end}} [[duration]] [[unit]] i [[group]]",
+          "ru": "Режим [[name]] неактивен !{{как минимум|менее}} [[duration]] [[unit]] в [[group]]",
+          "pl": "Tryb [[name]] jest nieaktywny przez !{{co najmniej|mniej niż}} [[duration]] [[unit]] w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]가 !{{최소|미만}} [[duration]] [[unit]] 동안 비활성 상태입니다",
+          "ar": "الوضع [[name]] غير نشط لمدة !{{على الأقل|أقل من}} [[duration]] [[unit]] في [[group]]"
+        },
+        "hint": {
+          "en": "Checks if a mode has been inactive for at least the specified duration. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Controleert of een stand minstens de opgegeven duur inactief is geweest. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Prüft, ob ein Modus mindestens die angegebene Dauer inaktiv war. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Vérifie si un mode a été inactif pendant au moins la durée spécifiée. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Verifica se una modalità è stata inattiva per almeno la durata specificata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Kontrollerar om ett läge har varit inaktivt i minst den angivna varaktigheten. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Sjekker om en modus har vært inaktiv i minst den angitte varigheten. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Comprueba si un modo ha estado inactivo durante al menos la duración especificada. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Kontrollerer om en tilstand har været inaktiv i mindst den angivne varighed. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Проверяет, был ли режим неактивен как минимум в течение указанной продолжительности. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Sprawdza, czy tryb był nieaktywny przez co najmniej określony czas. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 지정된 기간 이상 비활성 상태였는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يتحقق مما إذا كان الوضع غير نشط لمدة على الأقل المدة المحددة. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          },
+          {
+            "type": "number",
+            "name": "duration",
+            "min": 1,
+            "step": 1,
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "de": "Dauer",
+              "fr": "Durée",
+              "it": "Durata",
+              "sv": "Varaktighet",
+              "no": "Varighet",
+              "es": "Duración",
+              "da": "Varighed",
+              "ru": "Длительность",
+              "pl": "Czas trwania",
+              "ko": "지속 시간",
+              "ar": "المدة"
+            },
+            "placeholder": {
+              "en": "E.g. 10",
+              "nl": "Bijv. 10",
+              "de": "Z. B. 10",
+              "fr": "P. ex. 10",
+              "it": "Es. 10",
+              "sv": "T.ex. 10",
+              "no": "F.eks. 10",
+              "es": "P. ej. 10",
+              "da": "F.eks. 10",
+              "ru": "Напр. 10",
+              "pl": "Np. 10",
+              "ko": "예: 10",
+              "ar": "مثال: 10"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "de": "Einheit",
+              "fr": "Unité",
+              "it": "Unità",
+              "sv": "Enhet",
+              "no": "Enhet",
+              "es": "Unidad",
+              "da": "Enhed",
+              "ru": "Единица",
+              "pl": "Jednostka",
+              "ko": "단위",
+              "ar": "الوحدة"
+            },
+            "values": [
+              {
+                "id": "milliseconds",
+                "title": {
+                  "en": "milliseconds",
+                  "nl": "milliseconden",
+                  "de": "Millisekunden",
+                  "fr": "millisecondes",
+                  "it": "millisecondi",
+                  "sv": "millisekunder",
+                  "no": "millisekunder",
+                  "es": "milisegundos",
+                  "da": "millisekunder",
+                  "ru": "миллисекунды",
+                  "pl": "milisekundy",
+                  "ko": "밀리초",
+                  "ar": "ميلي ثانية"
+                }
+              },
+              {
+                "id": "seconds",
+                "title": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "de": "Sekunden",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "sv": "sekunder",
+                  "no": "sekunder",
+                  "es": "segundos",
+                  "da": "sekunder",
+                  "ru": "секунды",
+                  "pl": "sekundy",
+                  "ko": "초",
+                  "ar": "ثوانٍ"
+                }
+              },
+              {
+                "id": "minutes",
+                "title": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "de": "Minuten",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "sv": "minuter",
+                  "no": "minutter",
+                  "es": "minutos",
+                  "da": "minutter",
+                  "ru": "минуты",
+                  "pl": "minuty",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "title": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "de": "Stunden",
+                  "fr": "heures",
+                  "it": "ore",
+                  "sv": "timmar",
+                  "no": "timer",
+                  "es": "horas",
+                  "da": "timer",
+                  "ru": "часы",
+                  "pl": "godziny",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "title": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "de": "Tage",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "sv": "dagar",
+                  "no": "dager",
+                  "es": "días",
+                  "da": "dage",
+                  "ru": "дни",
+                  "pl": "dni",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "mode_is",
@@ -9126,6 +10132,897 @@
           "ar": "يلغي تنشيط وضع معين."
         },
         "args": [
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_activate",
+        "title": {
+          "en": "Activate mode in group",
+          "nl": "Activeer stand in groep",
+          "de": "Modus aktivieren in Gruppe",
+          "fr": "Activer le mode dans un groupe",
+          "it": "Attiva modalità in un gruppo",
+          "sv": "Aktivera läge i grupp",
+          "no": "Aktiver modus i gruppe",
+          "es": "Activar modo en un grupo",
+          "da": "Aktivér tilstand i gruppe",
+          "ru": "Активировать режим в группе",
+          "pl": "Aktywuj tryb w grupie",
+          "ko": "그룹에서 모드 활성화",
+          "ar": "تفعيل الوضع في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Activate [[name]] in [[group]]",
+          "nl": "Activeer [[name]] in [[group]]",
+          "de": "Aktiviere [[name]] in [[group]]",
+          "fr": "Activer [[name]] dans [[group]]",
+          "it": "Attiva [[name]] in [[group]]",
+          "sv": "Aktivera [[name]] i [[group]]",
+          "no": "Aktiver [[name]] i [[group]]",
+          "es": "Activar [[name]] en [[group]]",
+          "da": "Aktivér [[name]] i [[group]]",
+          "ru": "Активировать [[name]] в [[group]]",
+          "pl": "Aktywuj [[name]] w [[group]]",
+          "ko": "[[group]]에서 [[name]] 활성화",
+          "ar": "تفعيل [[name]] في [[group]]"
+        },
+        "hint": {
+          "en": "Activates a defined mode and deactivates all other modes. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Activeer een gedefinieerde stand en deactiveer alle andere standen. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Aktiviert einen definierten Modus und deaktiviert alle anderen Modi. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Active un mode défini et désactive tous les autres modes. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Attiva una modalità definita e disattiva tutte le altre modalità. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Aktiverar ett definierat läge och inaktiverar alla andra lägen. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Aktiverer en definert modus og deaktiverer alle andre modi. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Activa un modo definido y desactiva todos los demás modos. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Aktiverer en defineret tilstand og deaktiverer alle andre tilstande. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Активирует определенный режим и деактивирует все остальные режимы. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Aktywuje zdefiniowany tryb i dezaktywuje wszystkie inne tryby. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "정의된 모드를 활성화하고 다른 모든 모드를 비활성화합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يقوم بتفعيل وضع مُحدد وإلغاء تفعيل كل الأوضاع الأخرى. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_activate_for",
+        "title": {
+          "en": "Activate mode for in group",
+          "nl": "Activeer stand voor in groep",
+          "de": "Modus aktivieren für in Gruppe",
+          "fr": "Activer le mode pendant dans un groupe",
+          "it": "Attiva modalità per in un gruppo",
+          "sv": "Aktivera läge i i grupp",
+          "no": "Aktiver modus i i gruppe",
+          "es": "Activar modo durante en un grupo",
+          "da": "Aktivér tilstand i i gruppe",
+          "ru": "Активировать режим на в группе",
+          "pl": "Aktywuj tryb na w grupie",
+          "ko": "그룹에서 모드를 다음 시간 동안 활성화",
+          "ar": "تفعيل الوضع لمدة في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Activate mode [[name]] for [[duration]] [[unit]] in [[group]]",
+          "nl": "Activeer stand [[name]] voor [[duration]] [[unit]] in [[group]]",
+          "de": "Aktiviere Modus [[name]] für [[duration]] [[unit]] in [[group]]",
+          "fr": "Activer le mode [[name]] pendant [[duration]] [[unit]] dans [[group]]",
+          "it": "Attiva modalità [[name]] per [[duration]] [[unit]] in [[group]]",
+          "sv": "Aktivera läge [[name]] i [[duration]] [[unit]] i [[group]]",
+          "no": "Aktiver modus [[name]] i [[duration]] [[unit]] i [[group]]",
+          "es": "Activar modo [[name]] durante [[duration]] [[unit]] en [[group]]",
+          "da": "Aktivér tilstand [[name]] i [[duration]] [[unit]] i [[group]]",
+          "ru": "Активировать режим [[name]] на [[duration]] [[unit]] в [[group]]",
+          "pl": "Aktywuj tryb [[name]] na [[duration]] [[unit]] w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]를 [[duration]] [[unit]] 동안 활성화",
+          "ar": "تفعيل الوضع [[name]] لمدة [[duration]] [[unit]] في [[group]]"
+        },
+        "hint": {
+          "en": "Activates a defined mode for a specified duration and deactivates all other modes. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Activeert een gedefinieerde stand voor een opgegeven duur en deactiveert alle andere standen. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Aktiviert einen definierten Modus für eine angegebene Dauer und deaktiviert alle anderen Modi. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Active un mode défini pendant une durée spécifiée et désactive tous les autres modes. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Attiva una modalità definita per una durata specificata e disattiva tutte le altre modalità. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Aktiverar ett definierat läge under en angiven tid och inaktiverar alla andra lägen. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Aktiverer en definert modus i en angitt varighet og deaktiverer alle andre modi. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Activa un modo definido durante una duración especificada y desactiva todos los demás modos. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Aktiverer en defineret tilstand i en angivet varighed og deaktiverer alle andre tilstande. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Активирует определенный режим на указанную продолжительность и деактивирует все остальные режимы. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Aktywuje zdefiniowany tryb na określony czas i dezaktywuje wszystkie inne tryby. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "정의된 모드를 지정된 기간 동안 활성화하고 다른 모든 모드를 비활성화합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يقوم بتفعيل وضع مُحدد لمدة محددة وإلغاء تفعيل كل الأوضاع الأخرى. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          },
+          {
+            "type": "number",
+            "name": "duration",
+            "min": 1,
+            "step": 1,
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "de": "Dauer",
+              "fr": "Durée",
+              "it": "Durata",
+              "sv": "Varaktighet",
+              "no": "Varighet",
+              "es": "Duración",
+              "da": "Varighed",
+              "ru": "Длительность",
+              "pl": "Czas trwania",
+              "ko": "지속 시간",
+              "ar": "المدة"
+            },
+            "placeholder": {
+              "en": "E.g. 10",
+              "nl": "Bijv. 10",
+              "de": "Z. B. 10",
+              "fr": "P. ex. 10",
+              "it": "Es. 10",
+              "sv": "T.ex. 10",
+              "no": "F.eks. 10",
+              "es": "P. ej. 10",
+              "da": "F.eks. 10",
+              "ru": "Напр. 10",
+              "pl": "Np. 10",
+              "ko": "예: 10",
+              "ar": "مثال: 10"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "de": "Einheit",
+              "fr": "Unité",
+              "it": "Unità",
+              "sv": "Enhet",
+              "no": "Enhet",
+              "es": "Unidad",
+              "da": "Enhed",
+              "ru": "Единица",
+              "pl": "Jednostka",
+              "ko": "단위",
+              "ar": "الوحدة"
+            },
+            "values": [
+              {
+                "id": "milliseconds",
+                "title": {
+                  "en": "milliseconds",
+                  "nl": "milliseconden",
+                  "de": "Millisekunden",
+                  "fr": "millisecondes",
+                  "it": "millisecondi",
+                  "sv": "millisekunder",
+                  "no": "millisekunder",
+                  "es": "milisegundos",
+                  "da": "millisekunder",
+                  "ru": "миллисекунды",
+                  "pl": "milisekundy",
+                  "ko": "밀리초",
+                  "ar": "ميلي ثانية"
+                }
+              },
+              {
+                "id": "seconds",
+                "title": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "de": "Sekunden",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "sv": "sekunder",
+                  "no": "sekunder",
+                  "es": "segundos",
+                  "da": "sekunder",
+                  "ru": "секунды",
+                  "pl": "sekundy",
+                  "ko": "초",
+                  "ar": "ثواني"
+                }
+              },
+              {
+                "id": "minutes",
+                "title": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "de": "Minuten",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "sv": "minuter",
+                  "no": "minutter",
+                  "es": "minutos",
+                  "da": "minutter",
+                  "ru": "минуты",
+                  "pl": "minuty",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "title": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "de": "Stunden",
+                  "fr": "heures",
+                  "it": "ore",
+                  "sv": "timmar",
+                  "no": "timer",
+                  "es": "horas",
+                  "da": "timer",
+                  "ru": "часы",
+                  "pl": "godziny",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "title": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "de": "Tage",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "sv": "dagar",
+                  "no": "dager",
+                  "es": "días",
+                  "da": "dage",
+                  "ru": "дни",
+                  "pl": "dni",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "mode_group_activate_for_revert",
+        "title": {
+          "en": "Activate mode for, then revert in group",
+          "nl": "Activeer stand voor, daarna terug in groep",
+          "de": "Modus aktivieren für, dann zurück in Gruppe",
+          "fr": "Activer le mode pendant, puis revenir dans un groupe",
+          "it": "Attiva modalità per, poi ripristina in un gruppo",
+          "sv": "Aktivera läge i, återgå sedan i grupp",
+          "no": "Aktiver modus i, deretter tilbake i gruppe",
+          "es": "Activar modo durante, luego revertir en un grupo",
+          "da": "Aktivér tilstand i, vend derefter tilbage i gruppe",
+          "ru": "Активировать режим на время, затем вернуть в группе",
+          "pl": "Aktywuj tryb na, potem przywróć w grupie",
+          "ko": "그룹에서 모드를 일정 시간 활성화 후 되돌리기",
+          "ar": "تفعيل الوضع لمدة ثم العودة في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Activate mode [[name]] for [[duration]] [[unit]], then revert in [[group]]",
+          "nl": "Activeer stand [[name]] voor [[duration]] [[unit]], daarna terug in [[group]]",
+          "de": "Aktiviere Modus [[name]] für [[duration]] [[unit]], dann zurück in [[group]]",
+          "fr": "Activer le mode [[name]] pendant [[duration]] [[unit]], puis revenir dans [[group]]",
+          "it": "Attiva modalità [[name]] per [[duration]] [[unit]], poi ripristina in [[group]]",
+          "sv": "Aktivera läge [[name]] i [[duration]] [[unit]], återgå sedan i [[group]]",
+          "no": "Aktiver modus [[name]] i [[duration]] [[unit]], deretter tilbake i [[group]]",
+          "es": "Activar modo [[name]] durante [[duration]] [[unit]], luego revertir en [[group]]",
+          "da": "Aktivér tilstand [[name]] i [[duration]] [[unit]], vend derefter tilbage i [[group]]",
+          "ru": "Активировать режим [[name]] на [[duration]] [[unit]], затем вернуть в [[group]]",
+          "pl": "Aktywuj tryb [[name]] na [[duration]] [[unit]], potem przywróć w [[group]]",
+          "ko": "[[group]]에서 모드 [[name]]를 [[duration]] [[unit]] 동안 활성화 후 되돌리기",
+          "ar": "تفعيل الوضع [[name]] لمدة [[duration]] [[unit]] ثم العودة في [[group]]"
+        },
+        "hint": {
+          "en": "Activates a defined mode for a specified duration, then restores the previously active mode. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Activeert een gedefinieerde stand voor een opgegeven duur en herstelt daarna de vorige actieve stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Aktiviert einen definierten Modus für eine angegebene Dauer und stellt danach den zuvor aktiven Modus wieder her. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Active un mode défini pendant une durée spécifiée, puis restaure le mode précédemment actif. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Attiva una modalità definita per una durata specificata, poi ripristina la modalità precedentemente attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Aktiverar ett definierat läge under en angiven tid och återställer sedan det tidigare aktiva läget. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Aktiverer en definert modus i en angitt varighet og gjenoppretter deretter den forrige aktive modusen. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Activa un modo definido durante una duración especificada y luego restaura el modo activo anterior. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Aktiverer en defineret tilstand i en angivet varighed og gendanner derefter den tidligere aktive tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Активирует определенный режим на указанную продолжительность, затем восстанавливает ранее активный режим. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Aktywuje zdefiniowany tryb na określony czas, a następnie przywraca poprzednio aktywny tryb. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "정의된 모드를 지정된 기간 동안 활성화한 후 이전에 활성화된 모드를 복원합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يفعّل وضعاً محدداً لمدة محددة ثم يستعيد الوضع النشط السابق. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          },
+          {
+            "type": "number",
+            "name": "duration",
+            "min": 1,
+            "step": 1,
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "de": "Dauer",
+              "fr": "Durée",
+              "it": "Durata",
+              "sv": "Varaktighet",
+              "no": "Varighet",
+              "es": "Duración",
+              "da": "Varighed",
+              "ru": "Длительность",
+              "pl": "Czas trwania",
+              "ko": "지속 시간",
+              "ar": "المدة"
+            },
+            "placeholder": {
+              "en": "E.g. 10",
+              "nl": "Bijv. 10",
+              "de": "Z. B. 10",
+              "fr": "P. ex. 10",
+              "it": "Es. 10",
+              "sv": "T.ex. 10",
+              "no": "F.eks. 10",
+              "es": "P. ej. 10",
+              "da": "F.eks. 10",
+              "ru": "Напр. 10",
+              "pl": "Np. 10",
+              "ko": "예: 10",
+              "ar": "مثال: 10"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "de": "Einheit",
+              "fr": "Unité",
+              "it": "Unità",
+              "sv": "Enhet",
+              "no": "Enhet",
+              "es": "Unidad",
+              "da": "Enhed",
+              "ru": "Единица",
+              "pl": "Jednostka",
+              "ko": "단위",
+              "ar": "الوحدة"
+            },
+            "values": [
+              {
+                "id": "milliseconds",
+                "title": {
+                  "en": "milliseconds",
+                  "nl": "milliseconden",
+                  "de": "Millisekunden",
+                  "fr": "millisecondes",
+                  "it": "millisecondi",
+                  "sv": "millisekunder",
+                  "no": "millisekunder",
+                  "es": "milisegundos",
+                  "da": "millisekunder",
+                  "ru": "миллисекунды",
+                  "pl": "milisekundy",
+                  "ko": "밀리초",
+                  "ar": "ميلي ثانية"
+                }
+              },
+              {
+                "id": "seconds",
+                "title": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "de": "Sekunden",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "sv": "sekunder",
+                  "no": "sekunder",
+                  "es": "segundos",
+                  "da": "sekunder",
+                  "ru": "секунды",
+                  "pl": "sekundy",
+                  "ko": "초",
+                  "ar": "ثواني"
+                }
+              },
+              {
+                "id": "minutes",
+                "title": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "de": "Minuten",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "sv": "minuter",
+                  "no": "minutter",
+                  "es": "minutos",
+                  "da": "minutter",
+                  "ru": "минуты",
+                  "pl": "minuty",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "title": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "de": "Stunden",
+                  "fr": "heures",
+                  "it": "ore",
+                  "sv": "timmar",
+                  "no": "timer",
+                  "es": "horas",
+                  "da": "timer",
+                  "ru": "часы",
+                  "pl": "godziny",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "title": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "de": "Tage",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "sv": "dagar",
+                  "no": "dager",
+                  "es": "días",
+                  "da": "dage",
+                  "ru": "дни",
+                  "pl": "dni",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "mode_group_deactivate",
+        "title": {
+          "en": "Deactivate mode in group",
+          "nl": "Deactiveer stand in groep",
+          "de": "Modus deaktivieren in Gruppe",
+          "fr": "Désactiver le mode dans un groupe",
+          "it": "Disattiva modalità in un gruppo",
+          "sv": "Inaktivera läge i grupp",
+          "no": "Deaktiver modus i gruppe",
+          "es": "Desactivar modo en un grupo",
+          "da": "Deaktivér tilstand i gruppe",
+          "ru": "Деактивировать режим в группе",
+          "pl": "Dezaktywuj tryb w grupie",
+          "ko": "그룹에서 모드 비활성화",
+          "ar": "إلغاء تنشيط الوضع في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Deactivate [[name]] in [[group]]",
+          "nl": "Deactiveer [[name]] in [[group]]",
+          "de": "Deaktiviere [[name]] in [[group]]",
+          "fr": "Désactiver [[name]] dans [[group]]",
+          "it": "Disattiva [[name]] in [[group]]",
+          "sv": "Inaktivera [[name]] i [[group]]",
+          "no": "Deaktiver [[name]] i [[group]]",
+          "es": "Desactivar [[name]] en [[group]]",
+          "da": "Deaktivér [[name]] i [[group]]",
+          "ru": "Деактивировать [[name]] в [[group]]",
+          "pl": "Dezaktywuj [[name]] w [[group]]",
+          "ko": "[[group]]에서 [[name]] 비활성화",
+          "ar": "إلغاء تنشيط [[name]] في [[group]]"
+        },
+        "hint": {
+          "en": "Deactivates a defined mode. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Deactiveer een gedefinieerde stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Deaktiviert einen definierten Modus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Désactive un mode défini. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Disattiva una modalità definita. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Inaktiverar ett definierat läge. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Deaktiverer en definert modus. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Desactiva un modo definido. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Deaktiverer en defineret tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Деактивирует определенный режим. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Dezaktywuje zdefiniowany tryb. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "정의된 모드를 비활성화합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يلغي تنشيط وضع معين. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_reactivate",
+        "title": {
+          "en": "Reactivate mode in group",
+          "nl": "Activeer stand opnieuw in groep",
+          "de": "Modus erneut aktivieren in Gruppe",
+          "fr": "Réactiver le mode dans un groupe",
+          "it": "Riattiva modalità in un gruppo",
+          "sv": "Aktivera läge igen i grupp",
+          "no": "Aktiver modus på nytt i gruppe",
+          "es": "Reactivar modo en un grupo",
+          "da": "Genaktivér tilstand i gruppe",
+          "ru": "Повторно активировать режим в группе",
+          "pl": "Ponownie aktywuj tryb w grupie",
+          "ko": "그룹에서 모드를 다시 활성화",
+          "ar": "أعد تفعيل النمط في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Reactivate [[name]] in [[group]]",
+          "nl": "Activeer [[name]] opnieuw in [[group]]",
+          "de": "Aktiviere [[name]] erneut in [[group]]",
+          "fr": "Réactiver [[name]] dans [[group]]",
+          "it": "Riattiva [[name]] in [[group]]",
+          "sv": "Aktivera [[name]] igen i [[group]]",
+          "no": "Aktiver [[name]] på nytt i [[group]]",
+          "es": "Reactivar [[name]] en [[group]]",
+          "da": "Genaktivér [[name]] i [[group]]",
+          "ru": "Повторно активировать [[name]] в [[group]]",
+          "pl": "Ponownie aktywuj [[name]] w [[group]]",
+          "ko": "[[group]]에서 [[name]] 다시 활성화",
+          "ar": "أعد تفعيل [[name]] في [[group]]"
+        },
+        "hint": {
+          "en": "Re-triggers all 'mode is activated' cards. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Trigger alle 'stand is geactiveerd' kaarten opnieuw. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Löst alle 'Modus ist aktiviert'-Karten erneut aus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Relance toutes les cartes « mode est activé ». S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Riattiva tutte le schede « modalità è attivata ». Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Triggar alla 'läge är aktiverat'-kort igen. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Gjenutløser alle «modus er aktivert» kort. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Vuelve a activar todas las tarjetas «modo está activado». Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Gentrigger alle 'tilstand er aktiveret'-kort. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Повторно запускает все карточки «режим активирован». Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Ponownie wyzwala wszystkie karty «tryb jest aktywowany». Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모든 '모드가 활성화되었습니다' 카드를 다시 트리거합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يعيد تفعيل جميع البطاقات \"تم تفعيل النمط\". ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand",
+              "de": "Modus",
+              "fr": "Mode",
+              "it": "Modalità",
+              "sv": "Läge",
+              "no": "Modus",
+              "es": "Modo",
+              "da": "Tilstand",
+              "ru": "Режим",
+              "pl": "Tryb",
+              "ko": "모드",
+              "ar": "وضع"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_reactivate_current",
+        "title": {
+          "en": "Reactivate current mode in group",
+          "nl": "Activeer huidige stand opnieuw in groep",
+          "de": "Aktuellen Modus erneut aktivieren in Gruppe",
+          "fr": "Réactiver le mode actuel dans un groupe",
+          "it": "Riattiva modalità corrente in un gruppo",
+          "sv": "Aktivera aktuellt läge igen i grupp",
+          "no": "Aktiver nåværende modus på nytt i gruppe",
+          "es": "Reactivar modo actual en un grupo",
+          "da": "Genaktivér aktuel tilstand i gruppe",
+          "ru": "Повторно активировать текущий режим в группе",
+          "pl": "Ponownie aktywuj aktualny tryb w grupie",
+          "ko": "그룹에서 현재 모드를 다시 활성화",
+          "ar": "أعد تفعيل النمط الحالي في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Reactivate current mode in [[group]]",
+          "nl": "Activeer huidige stand opnieuw in [[group]]",
+          "de": "Aktuellen Modus erneut aktivieren in [[group]]",
+          "fr": "Réactiver le mode actuel dans [[group]]",
+          "it": "Riattiva modalità corrente in [[group]]",
+          "sv": "Aktivera aktuellt läge igen i [[group]]",
+          "no": "Aktiver nåværende modus på nytt i [[group]]",
+          "es": "Reactivar modo actual en [[group]]",
+          "da": "Genaktivér aktuel tilstand i [[group]]",
+          "ru": "Повторно активировать текущий режим в [[group]]",
+          "pl": "Ponownie aktywuj aktualny tryb w [[group]]",
+          "ko": "[[group]]에서 현재 모드를 다시 활성화",
+          "ar": "أعد تفعيل النمط الحالي في [[group]]"
+        },
+        "hint": {
+          "en": "Re-triggers all 'mode is activated' cards for the currently active mode. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Trigger alle 'stand is geactiveerd' kaarten opnieuw voor de huidige stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Löst alle 'Modus ist aktiviert'-Karten für den aktuellen Modus erneut aus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Relance toutes les cartes « mode est activé » pour le mode actuel. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Riattiva tutte le schede « modalità è attivata » per la modalità corrente. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Triggar alla 'läge är aktiverat'-kort igen för det aktuella läget. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Gjenutløser alle «modus er aktivert» kort for nåværende modus. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Vuelve a activar todas las tarjetas «modo está activado» para el modo actual. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Gentrigger alle 'tilstand er aktiveret'-kort for den aktuelle tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Повторно запускает все карточки «режим активирован» для текущего режима. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Ponownie wyzwala wszystkie karty «tryb jest aktywowany» dla aktualnego trybu. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "현재 활성화된 모드에 대한 모든 '모드가 활성화되었습니다' 카드를 다시 트리거합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يعيد تفعيل جميع البطاقات \"تم تفعيل النمط\" للنمط الحالي. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mode_group_toggle",
+        "title": {
+          "en": "Toggle mode in group",
+          "nl": "Schakel stand om in groep",
+          "de": "Modus umschalten in Gruppe",
+          "fr": "Basculer le mode dans un groupe",
+          "it": "Commuta modalità in un gruppo",
+          "sv": "Växla läge i grupp",
+          "no": "Veksle modus i gruppe",
+          "es": "Alternar modo en un grupo",
+          "da": "Skift tilstand i gruppe",
+          "ru": "Переключить режим в группе",
+          "pl": "Przełącz tryb w grupie",
+          "ko": "그룹에서 모드 전환",
+          "ar": "تبديل الوضع في مجموعة"
+        },
+        "titleFormatted": {
+          "en": "Toggle [[name]] in [[group]]",
+          "nl": "Schakel [[name]] om in [[group]]",
+          "de": "Schalte [[name]] um in [[group]]",
+          "fr": "Basculer [[name]] dans [[group]]",
+          "it": "Commuta [[name]] in [[group]]",
+          "sv": "Växla [[name]] i [[group]]",
+          "no": "Veksle [[name]] i [[group]]",
+          "es": "Alternar [[name]] en [[group]]",
+          "da": "Skift [[name]] i [[group]]",
+          "ru": "Переключить [[name]] в [[group]]",
+          "pl": "Przełącz [[name]] w [[group]]",
+          "ko": "[[group]]에서 [[name]] 전환",
+          "ar": "تبديل [[name]] في [[group]]"
+        },
+        "hint": {
+          "en": "Turns the mode on if it’s off, and off if it’s on. Scoped to the chosen group, which runs independently of the other groups.",
+          "nl": "Schakelt de stand aan als deze uit is, en uit als deze aan is. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+          "de": "Schaltet den Modus ein wenn er aus ist und aus wenn er an ist. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+          "fr": "Active le mode s’il est désactivé et le désactive s’il est activé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+          "it": "Attiva la modalità se è disattivata e la disattiva se è attivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+          "sv": "Aktiverar läget om det är av och inaktiverar det om det är på. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+          "no": "Aktiverer moduset hvis det er av og deaktiverer det hvis det er på. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+          "es": "Activa el modo si está desactivado y lo desactiva si está activado. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+          "da": "Aktiverer tilstanden hvis den er slukket og deaktiverer den hvis den er tændt. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+          "ru": "Включает режим если он выключен и выключает если он включен. Действует в выбранной группе, которая работает независимо от других групп.",
+          "pl": "Włącza tryb jeśli jest wyłączony i wyłącza если jest włączony. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+          "ko": "모드가 꺼져 있으면 켜고 켜져 있으면 끕니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+          "ar": "يشغل الوضع إذا كان مغلقًا، ويغلقه إذا كان مفتوحًا. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+              "en": "Group",
+              "nl": "Groep",
+              "de": "Gruppe",
+              "fr": "Groupe",
+              "it": "Gruppo",
+              "sv": "Grupp",
+              "no": "Gruppe",
+              "es": "Grupo",
+              "da": "Gruppe",
+              "ru": "Группа",
+              "pl": "Grupa",
+              "ko": "그룹",
+              "ar": "مجموعة"
+            }
+          },
           {
             "type": "autocomplete",
             "name": "name",
@@ -14611,7 +16508,42 @@
         "ar": "الوضع الحالي"
       },
       "height": 120,
-      "settings": [],
+      "settings": [
+        {
+          "id": "group",
+          "type": "autocomplete",
+          "title": {
+            "en": "Group",
+            "nl": "Groep",
+            "de": "Gruppe",
+            "fr": "Groupe",
+            "it": "Gruppo",
+            "sv": "Grupp",
+            "no": "Gruppe",
+            "es": "Grupo",
+            "da": "Gruppe",
+            "ru": "Группа",
+            "pl": "Grupa",
+            "ko": "그룹",
+            "ar": "مجموعة"
+          },
+          "hint": {
+            "en": "Leave empty for the modes that are not in a group.",
+            "nl": "Laat leeg voor de standen die niet in een groep zitten.",
+            "de": "Leer lassen für die Modi, die in keiner Gruppe sind.",
+            "fr": "Laissez vide pour les modes qui ne sont dans aucun groupe.",
+            "it": "Lascia vuoto per le modalità che non sono in un gruppo.",
+            "sv": "Lämna tomt för de lägen som inte ingår i en grupp.",
+            "no": "La stå tomt for modusene som ikke er i en gruppe.",
+            "es": "Déjalo vacío para los modos que no están en un grupo.",
+            "da": "Lad stå tomt for de tilstande, der ikke er i en gruppe.",
+            "ru": "Оставьте пустым для режимов, которые не входят в группу.",
+            "pl": "Pozostaw puste dla trybów, które nie należą do grupy.",
+            "ko": "그룹에 속하지 않은 모드를 표시하려면 비워 두세요.",
+            "ar": "اتركه فارغاً للأوضاع التي ليست ضمن مجموعة."
+          }
+        }
+      ],
       "api": {
         "get": {
           "method": "GET",
@@ -14638,6 +16570,40 @@
       },
       "height": 120,
       "settings": [
+        {
+          "id": "group",
+          "type": "autocomplete",
+          "title": {
+            "en": "Group",
+            "nl": "Groep",
+            "de": "Gruppe",
+            "fr": "Groupe",
+            "it": "Gruppo",
+            "sv": "Grupp",
+            "no": "Gruppe",
+            "es": "Grupo",
+            "da": "Gruppe",
+            "ru": "Группа",
+            "pl": "Grupa",
+            "ko": "그룹",
+            "ar": "مجموعة"
+          },
+          "hint": {
+            "en": "Leave empty for the modes that are not in a group.",
+            "nl": "Laat leeg voor de standen die niet in een groep zitten.",
+            "de": "Leer lassen für die Modi, die in keiner Gruppe sind.",
+            "fr": "Laissez vide pour les modes qui ne sont dans aucun groupe.",
+            "it": "Lascia vuoto per le modalità che non sono in un gruppo.",
+            "sv": "Lämna tomt för de lägen som inte ingår i en grupp.",
+            "no": "La stå tomt for modusene som ikke er i en gruppe.",
+            "es": "Déjalo vacío para los modos que no están en un grupo.",
+            "da": "Lad stå tomt for de tilstande, der ikke er i en gruppe.",
+            "ru": "Оставьте пустым для режимов, которые не входят в группу.",
+            "pl": "Pozostaw puste dla trybów, które nie należą do grupy.",
+            "ko": "그룹에 속하지 않은 모드를 표시하려면 비워 두세요.",
+            "ar": "اتركه فارغاً للأوضاع التي ليست ضمن مجموعة."
+          }
+        },
         {
           "id": "readonly",
           "type": "checkbox",

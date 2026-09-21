@@ -15,7 +15,42 @@
         "ar": "الوضع الحالي"
     },
     "height": 120,
-    "settings": [],
+    "settings": [
+        {
+            "id": "group",
+            "type": "autocomplete",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            },
+            "hint": {
+                "en": "Leave empty for the modes that are not in a group.",
+                "nl": "Laat leeg voor de standen die niet in een groep zitten.",
+                "de": "Leer lassen für die Modi, die in keiner Gruppe sind.",
+                "fr": "Laissez vide pour les modes qui ne sont dans aucun groupe.",
+                "it": "Lascia vuoto per le modalità che non sono in un gruppo.",
+                "sv": "Lämna tomt för de lägen som inte ingår i en grupp.",
+                "no": "La stå tomt for modusene som ikke er i en gruppe.",
+                "es": "Déjalo vacío para los modos que no están en un grupo.",
+                "da": "Lad stå tomt for de tilstande, der ikke er i en gruppe.",
+                "ru": "Оставьте пустым для режимов, которые не входят в группу.",
+                "pl": "Pozostaw puste dla trybów, które nie należą do grupy.",
+                "ko": "그룹에 속하지 않은 모드를 표시하려면 비워 두세요.",
+                "ar": "اتركه فارغاً للأوضاع التي ليست ضمن مجموعة."
+            }
+        }
+    ],
     "api": {
         "get": {
             "method": "GET",

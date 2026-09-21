@@ -1,4 +1,5 @@
 import { Shortcuts } from '@basmilius/homey-common';
+import { DEFAULT_MODE_GROUP } from '../const';
 import type { FlowBitsApp } from '../types';
 import { createFilterAutocomplete, searchIcons } from '../util';
 
@@ -8,6 +9,7 @@ export default class Widgets extends Shortcuts<FlowBitsApp> {
         await this.#initializeFlagOnOff();
         await this.#initializeFlags();
         await this.#initializeLabel();
+        await this.#initializeModeCurrent();
         await this.#initializeModes();
         await this.#initializeSetStates();
         await this.#initializeSetStatus();
@@ -66,11 +68,19 @@ export default class Widgets extends Shortcuts<FlowBitsApp> {
         });
     }
 
+    async #initializeModeCurrent(): Promise<void> {
+        const widget = this.dashboards.getWidget('mode_current');
+
+        widget.registerSettingAutocompleteListener('group', async () => await this.#groupAutocomplete());
+    }
+
     async #initializeModes(): Promise<void> {
         const widget = this.dashboards.getWidget('modes');
 
-        widget.registerSettingAutocompleteListener('filter', async (query: string) => {
-            const modes = await this.app.modes.findAll();
+        widget.registerSettingAutocompleteListener('group', async () => await this.#groupAutocomplete());
+
+        widget.registerSettingAutocompleteListener('filter', async (query: string, settings: Record<string, any>) => {
+            const modes = await this.app.modes.findAllIn(settings?.group?.name || DEFAULT_MODE_GROUP);
             const allNames = Array
                 .from(new Set(modes.map(f => f.name.trim())))
                 .toSorted((a, b) => a.localeCompare(b));
@@ -79,6 +89,18 @@ export default class Widgets extends Shortcuts<FlowBitsApp> {
                 itemsField: 'modes'
             });
         });
+    }
+
+    /**
+     * Lists the named mode groups. The default group is left out: a widget picks it by leaving
+     * the setting empty.
+     */
+    async #groupAutocomplete(): Promise<{ name: string }[]> {
+        const groups = await this.app.api.getModeGroups();
+
+        return groups
+            .filter(group => group.name !== DEFAULT_MODE_GROUP)
+            .map(group => ({name: group.name}));
     }
 
     async #initializeSetStates(): Promise<void> {

@@ -1,4 +1,5 @@
 import { action, FlowActionEntity } from '@basmilius/homey-common';
+import { DEFAULT_MODE_GROUP } from '../../const';
 import type { FlowBitsApp } from '../../types';
 import { AutocompleteProviders } from '..';
 
@@ -11,7 +12,7 @@ export default class extends FlowActionEntity<FlowBitsApp, Args> {
     }
 
     async onRun(args: Args): Promise<void> {
-        await this.app.modes.activate(args.name.name);
+        await this.app.modes.activate(DEFAULT_MODE_GROUP, args.name.name);
     }
 
     async onUpdate(): Promise<void> {

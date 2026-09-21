@@ -39,8 +39,10 @@
             await update();
         }
 
+        const group = Homey.getSettings().group?.name ?? '';
+
         async function update() {
-            const currentMode = await Homey.api('GET', '/');
+            const currentMode = await Homey.api('GET', `/?group=${encodeURIComponent(group)}`);
 
             currentModeName.innerText = currentMode?.name ?? '—';
 

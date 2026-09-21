@@ -1,0 +1,69 @@
+{
+    "id": "mode_group_active",
+    "title": {
+        "en": "Any mode is active in group",
+        "nl": "Een stand is actief in groep",
+        "de": "Ein Modus ist aktiv in Gruppe",
+        "fr": "Un mode est actif dans un groupe",
+        "it": "Una modalità è attiva in un gruppo",
+        "sv": "Ett läge är aktivt i grupp",
+        "no": "En modus er aktiv i gruppe",
+        "es": "Algún modo está activo en un grupo",
+        "da": "En tilstand er aktiv i gruppe",
+        "ru": "Какой-либо режим активен в группе",
+        "pl": "Jakiś tryb jest aktywny w grupie",
+        "ko": "그룹에서 활성화된 모드 있음",
+        "ar": "يوجد وضع نشط في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "!{{Any mode is active|No mode is active}} in [[group]]",
+        "nl": "!{{Een stand is actief|Geen stand is actief}} in [[group]]",
+        "de": "!{{Ein Modus ist aktiv|Kein Modus ist aktiv}} in [[group]]",
+        "fr": "!{{Un mode est actif|Aucun mode n'est actif}} dans [[group]]",
+        "it": "!{{Una modalità è attiva|Nessuna modalità è attiva}} in [[group]]",
+        "sv": "!{{Ett läge är aktivt|Inget läge är aktivt}} i [[group]]",
+        "no": "!{{En modus er aktiv|Ingen modus er aktiv}} i [[group]]",
+        "es": "!{{Algún modo está activo|Ningún modo está activo}} en [[group]]",
+        "da": "!{{En tilstand er aktiv|Ingen tilstand er aktiv}} i [[group]]",
+        "ru": "!{{Какой-либо режим активен|Ни один режим не активен}} в [[group]]",
+        "pl": "!{{Jakiś tryb jest aktywny|Żaden tryb nie jest aktywny}} w [[group]]",
+        "ko": "[[group]]에서 !{{활성화된 모드 있음|활성화된 모드 없음}}",
+        "ar": "!{{يوجد وضع نشط|لا يوجد وضع نشط}} في [[group]]"
+    },
+    "hint": {
+        "en": "Checks if any mode is currently active. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Controleert of er een stand actief is. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Prüft, ob ein Modus aktiv ist. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Vérifie si un mode est actuellement actif. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Verifica se una modalità è attualmente attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Kontrollerar om ett läge är aktivt. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Sjekker om en modus er aktiv. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Comprueba si algún modo está activo. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Kontrollerer om en tilstand er aktiv. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Проверяет, активен ли какой-либо режим. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Sprawdza, czy jakiś tryb jest aktywny. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "현재 활성화된 모드가 있는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتحقق مما إذا كان هناك وضع نشط حاليًا. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        }
+    ]
+}

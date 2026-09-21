@@ -1,0 +1,69 @@
+{
+    "id": "mode_group_reactivate_current",
+    "title": {
+        "en": "Reactivate current mode in group",
+        "nl": "Activeer huidige stand opnieuw in groep",
+        "de": "Aktuellen Modus erneut aktivieren in Gruppe",
+        "fr": "Réactiver le mode actuel dans un groupe",
+        "it": "Riattiva modalità corrente in un gruppo",
+        "sv": "Aktivera aktuellt läge igen i grupp",
+        "no": "Aktiver nåværende modus på nytt i gruppe",
+        "es": "Reactivar modo actual en un grupo",
+        "da": "Genaktivér aktuel tilstand i gruppe",
+        "ru": "Повторно активировать текущий режим в группе",
+        "pl": "Ponownie aktywuj aktualny tryb w grupie",
+        "ko": "그룹에서 현재 모드를 다시 활성화",
+        "ar": "أعد تفعيل النمط الحالي في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Reactivate current mode in [[group]]",
+        "nl": "Activeer huidige stand opnieuw in [[group]]",
+        "de": "Aktuellen Modus erneut aktivieren in [[group]]",
+        "fr": "Réactiver le mode actuel dans [[group]]",
+        "it": "Riattiva modalità corrente in [[group]]",
+        "sv": "Aktivera aktuellt läge igen i [[group]]",
+        "no": "Aktiver nåværende modus på nytt i [[group]]",
+        "es": "Reactivar modo actual en [[group]]",
+        "da": "Genaktivér aktuel tilstand i [[group]]",
+        "ru": "Повторно активировать текущий режим в [[group]]",
+        "pl": "Ponownie aktywuj aktualny tryb w [[group]]",
+        "ko": "[[group]]에서 현재 모드를 다시 활성화",
+        "ar": "أعد تفعيل النمط الحالي في [[group]]"
+    },
+    "hint": {
+        "en": "Re-triggers all 'mode is activated' cards for the currently active mode. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Trigger alle 'stand is geactiveerd' kaarten opnieuw voor de huidige stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Löst alle 'Modus ist aktiviert'-Karten für den aktuellen Modus erneut aus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Relance toutes les cartes « mode est activé » pour le mode actuel. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Riattiva tutte le schede « modalità è attivata » per la modalità corrente. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Triggar alla 'läge är aktiverat'-kort igen för det aktuella läget. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Gjenutløser alle «modus er aktivert» kort for nåværende modus. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Vuelve a activar todas las tarjetas «modo está activado» para el modo actual. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Gentrigger alle 'tilstand er aktiveret'-kort for den aktuelle tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Повторно запускает все карточки «режим активирован» для текущего режима. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Ponownie wyzwala wszystkie karty «tryb jest aktywowany» dla aktualnego trybu. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "현재 활성화된 모드에 대한 모든 '모드가 활성화되었습니다' 카드를 다시 트리거합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يعيد تفعيل جميع البطاقات \"تم تفعيل النمط\" للنمط الحالي. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        }
+    ]
+}

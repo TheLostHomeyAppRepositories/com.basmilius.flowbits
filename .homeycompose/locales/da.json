@@ -10,12 +10,16 @@
         "set_state_new": "Ny sæt-tilstand i dette flow, vil blive kendt efter lagring af flowet",
         "signal_new": "Ny signal i dette flow",
         "slider_new": "Ny skyder i dette flow",
-        "timer_new": "Ny timer i dette flow"
+        "timer_new": "Ny timer i dette flow",
+        "mode_group_new": "Ny gruppe i dette flow",
+        "mode_group_mode_new": "Ny tilstand i denne gruppe, kendes når flowet gemmes"
     },
     "notification": {
         "mode_activated": "**__name__** er aktiveret.",
         "mode_deactivated": "**__name__** er deaktiveret.",
-        "welcome": "Velkommen til **FlowBits**! Gå til flowbits.nl for at lære mere om, hvad du kan gøre med FlowBits."
+        "welcome": "Velkommen til **FlowBits**! Gå til flowbits.nl for at lære mere om, hvad du kan gøre med FlowBits.",
+        "mode_group_activated": "**__name__** er aktiveret i **__group__**.",
+        "mode_group_deactivated": "**__name__** er deaktiveret i **__group__**."
     },
     "token": {
         "day_period": "Dagsperiode (rå)",
@@ -109,7 +113,7 @@
         },
         "modes": {
             "title": "Tilstande",
-            "description": "Kun én tilstand kan være aktiv ad gangen. Opret og administrér tilstande via handlinger, betingelser og triggere i dine flows.",
+            "description": "Inden for en gruppe kan kun én tilstand være aktiv ad gangen. Opret og administrer tilstande med tilstandshandlinger, betingelser og udløsere i dine flows.",
             "empty": "Der er endnu ikke oprettet nogen tilstande."
         },
         "sets": {
@@ -137,7 +141,8 @@
         },
         "card_statistics": {
             "title": "Flowkortstatistik",
-            "description": "Dette er brugsstatistik for individuelle flowkort."
+            "description": "Dette er brugsstatistik for individuelle flowkort.",
+            "open": "Vis statistik for flowkort"
         }
     },
     "color": {

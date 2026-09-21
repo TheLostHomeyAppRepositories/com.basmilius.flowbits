@@ -10,12 +10,16 @@
         "set_state_new": "Nuevo estado de conjunto en este flujo, se conocerá después de guardar el flujo",
         "signal_new": "Nueva señal en este flujo",
         "slider_new": "Nuevo deslizador en este flujo",
-        "timer_new": "Nuevo temporizador en este flujo"
+        "timer_new": "Nuevo temporizador en este flujo",
+        "mode_group_new": "Nuevo grupo en este flujo",
+        "mode_group_mode_new": "Nuevo modo en este grupo, se conocerá al guardar el flujo"
     },
     "notification": {
         "mode_activated": "**__name__** está activado.",
         "mode_deactivated": "**__name__** está desactivado.",
-        "welcome": "¡Bienvenido a **FlowBits**! Visita flowbits.nl para saber más sobre lo que puedes hacer con FlowBits."
+        "welcome": "¡Bienvenido a **FlowBits**! Visita flowbits.nl para saber más sobre lo que puedes hacer con FlowBits.",
+        "mode_group_activated": "**__name__** está activado en **__group__**.",
+        "mode_group_deactivated": "**__name__** está desactivado en **__group__**."
     },
     "token": {
         "day_period": "Periodo del día (sin procesar)",
@@ -109,7 +113,7 @@
         },
         "modes": {
             "title": "Modos",
-            "description": "Solo un modo puede estar activo a la vez. Crea y gestiona modos mediante acciones, condiciones y disparadores en tus flujos.",
+            "description": "Dentro de un grupo solo puede haber un modo activo a la vez. Crea y gestiona los modos con las acciones, condiciones y disparadores de modo en tus flujos.",
             "empty": "Aún no se han creado modos."
         },
         "sets": {
@@ -137,7 +141,8 @@
         },
         "card_statistics": {
             "title": "Estadísticas de tarjetas de flujo",
-            "description": "Estas son estadísticas de uso de tarjetas de flujo individuales."
+            "description": "Estas son estadísticas de uso de tarjetas de flujo individuales.",
+            "open": "Mostrar estadísticas de tarjetas"
         }
     },
     "color": {

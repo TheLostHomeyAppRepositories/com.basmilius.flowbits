@@ -1,5 +1,6 @@
 export { default as ButtonPrimary } from './ButtonPrimary.vue';
 export { default as ButtonTransparent } from './ButtonTransparent.vue';
+export { default as CardStatistics } from './CardStatistics.vue';
 export { default as Category } from './Category.vue';
 export { default as ColorPicker } from './ColorPicker.vue';
 export { default as Documentation } from './Documentation.vue';
@@ -11,5 +12,6 @@ export { default as FormInput } from './FormInput.vue';
 export { default as Icon } from './Icon.vue';
 export { default as IconPicker } from './IconPicker.vue';
 export { default as Statistic } from './Statistic.vue';
+export { default as Overlay } from './Overlay.vue';
 export { default as Statistics } from './Statistics.vue';
 export { default as Top } from './Top.vue';

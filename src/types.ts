@@ -82,6 +82,12 @@ export type Mode = WithLook<{
     readonly name: string;
 }>;
 
+export type ModeGroup = {
+    readonly name: string;
+    readonly currentMode: string | null;
+    readonly modes: Mode[];
+};
+
 export type NoRepeatWindow = {
     readonly name: string;
     readonly lastUpdate: string | undefined;

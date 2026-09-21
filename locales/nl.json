@@ -10,12 +10,16 @@
     "set_state_new": "Nieuwe set-stand in deze flow, wordt na opslaan van de flow bekend",
     "signal_new": "Nieuw signaal in deze flow",
     "slider_new": "Nieuwe slider in deze flow",
-    "timer_new": "Nieuwe timer in deze flow"
+    "timer_new": "Nieuwe timer in deze flow",
+    "mode_group_new": "Nieuwe groep in deze flow",
+    "mode_group_mode_new": "Nieuwe stand in deze groep, wordt bekend na het opslaan van de flow"
   },
   "notification": {
     "mode_activated": "**__name__** is geactiveerd.",
     "mode_deactivated": "**__name__** is gedeactiveerd.",
-    "welcome": "Welkom bij **FlowBits**! Ga naar flowbits.nl om meer te weten te komen over wat je kan doen met FlowBits."
+    "welcome": "Welkom bij **FlowBits**! Ga naar flowbits.nl om meer te weten te komen over wat je kan doen met FlowBits.",
+    "mode_group_activated": "**__name__** is geactiveerd in **__group__**.",
+    "mode_group_deactivated": "**__name__** is gedeactiveerd in **__group__**."
   },
   "token": {
     "day_period": "Dagperiode (ruw)",
@@ -105,7 +109,7 @@
     },
     "modes": {
       "title": "Standen",
-      "description": "Er kan maar één stand tegelijk actief zijn. Maak en beheer standen via stand-acties, -voorwaarden en -triggers in je flows.",
+      "description": "Binnen een groep kan maar één stand tegelijk actief zijn. Maak en beheer standen met de standacties, -voorwaarden en -triggers in je flows.",
       "empty": "Er zijn nog geen standen aangemaakt."
     },
     "sets": {
@@ -133,7 +137,8 @@
     },
     "card_statistics": {
       "title": "Flowkaartstatistieken",
-      "description": "Dit zijn gebruiksstatistieken voor afzonderlijke flowkaarten."
+      "description": "Dit zijn gebruiksstatistieken voor afzonderlijke flowkaarten.",
+      "open": "Toon flow kaart statistieken"
     },
     "documentation": {
       "title": "Documentatie",

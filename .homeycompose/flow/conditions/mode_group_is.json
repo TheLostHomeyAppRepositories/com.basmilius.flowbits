@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_is",
+    "title": {
+        "en": "Mode is active in group",
+        "nl": "Stand is actief in groep",
+        "de": "Modus ist aktiv in Gruppe",
+        "fr": "Le mode est actif dans un groupe",
+        "it": "La modalità è attiva in un gruppo",
+        "sv": "Läget är aktivt i grupp",
+        "no": "Modus er aktiv i gruppe",
+        "es": "El modo está activo en un grupo",
+        "da": "Tilstand er aktiv i gruppe",
+        "ru": "Режим активен в группе",
+        "pl": "Tryb jest aktywny w grupie",
+        "ko": "그룹에서 모드가 활성화됨",
+        "ar": "الوضع نشط في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Mode [[name]] is !{{active|inactive}} in [[group]]",
+        "nl": "Stand [[name]] is !{{actief|inactief}} in [[group]]",
+        "de": "Modus [[name]] ist !{{aktiv|inaktiv}} in [[group]]",
+        "fr": "Mode [[name]] est !{{actif|inactif}} dans [[group]]",
+        "it": "Modalità [[name]] è !{{attivo|inattivo}} in [[group]]",
+        "sv": "Läge [[name]] är !{{aktiv|inaktiv}} i [[group]]",
+        "no": "Modus [[name]] er !{{aktiv|inaktiv}} i [[group]]",
+        "es": "Modo [[name]] está !{{activo|inactivo}} en [[group]]",
+        "da": "Tilstand [[name]] er !{{aktiv|inaktiv}} i [[group]]",
+        "ru": "Режим [[name]] !{{активен|неактивен}} в [[group]]",
+        "pl": "Tryb [[name]] jest !{{aktywny|nieaktywny}} w [[group]]",
+        "ko": "[[group]]에서 모드 [[name]]는 !{{활성|비활성}} 상태입니다",
+        "ar": "الوضع [[name]] هو !{{نشط|غير نشط}} في [[group]]"
+    },
+    "hint": {
+        "en": "Checks if a mode is activated. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Controleert of een stand is geactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Prüft, ob ein Modus aktiviert ist. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Vérifie si un mode est activé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Verifica se una modalità è attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Kontrollerar om ett läge är aktiverat. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Sjekker om en modus er aktivert. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Comprueba si un modo está activado. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Kontrollerer om en tilstand er aktiveret. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Проверяет, активирован ли режим. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Sprawdza, czy tryb jest aktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "모드가 활성화되었는지 확인합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتحقق مما إذا كان الوضع نشطًا. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "الوضع"
+            }
+        }
+    ]
+}

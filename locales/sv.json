@@ -10,12 +10,16 @@
     "set_state_new": "Nytt set-tillstånd i detta flöde, kommer att bli känt efter att flödet sparas",
     "signal_new": "Ny signal i detta flöde",
     "slider_new": "Ny slider i detta flöde",
-    "timer_new": "Ny timer i detta flöde"
+    "timer_new": "Ny timer i detta flöde",
+    "mode_group_new": "Ny grupp i detta flöde",
+    "mode_group_mode_new": "Nytt läge i denna grupp, blir känt när flödet sparas"
   },
   "notification": {
     "mode_activated": "**__name__** är aktiverad.",
     "mode_deactivated": "**__name__** är inaktiverad.",
-    "welcome": "Välkommen till **FlowBits**! Gå till flowbits.nl för att lära dig mer om vad du kan göra med FlowBits."
+    "welcome": "Välkommen till **FlowBits**! Gå till flowbits.nl för att lära dig mer om vad du kan göra med FlowBits.",
+    "mode_group_activated": "**__name__** är aktiverat i **__group__**.",
+    "mode_group_deactivated": "**__name__** är inaktiverat i **__group__**."
   },
   "token": {
     "day_period": "Dagsperiod (rå)",
@@ -105,7 +109,7 @@
     },
     "modes": {
       "title": "Lägen",
-      "description": "Endast ett läge kan vara aktivt åt gången. Skapa och hantera lägen i dina flöden.",
+      "description": "Inom en grupp kan bara ett läge vara aktivt åt gången. Skapa och hantera lägen med lägeshandlingar, villkor och utlösare i dina flöden.",
       "empty": "Inga lägen har skapats ännu."
     },
     "sets": {
@@ -133,7 +137,8 @@
     },
     "card_statistics": {
       "title": "Flödeskortsstatistik",
-      "description": "Detta är användningsstatistik för individuella flödeskort."
+      "description": "Detta är användningsstatistik för individuella flödeskort.",
+      "open": "Visa statistik för flödeskort"
     },
     "documentation": {
       "title": "Dokumentation",

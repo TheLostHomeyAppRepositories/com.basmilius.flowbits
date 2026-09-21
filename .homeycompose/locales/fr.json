@@ -10,12 +10,16 @@
         "set_state_new": "Nouvel état d'ensemble dans ce flux, sera connu après enregistrement du flux",
         "signal_new": "Nouveau signal dans ce flux",
         "slider_new": "Nouveau curseur dans ce flux",
-        "timer_new": "Nouveau minuteur dans ce flux"
+        "timer_new": "Nouveau minuteur dans ce flux",
+        "mode_group_new": "Nouveau groupe dans ce flux",
+        "mode_group_mode_new": "Nouveau mode dans ce groupe, connu après l'enregistrement du flux"
     },
     "notification": {
         "mode_activated": "**__name__** est activé.",
         "mode_deactivated": "**__name__** est désactivé.",
-        "welcome": "Bienvenue sur **FlowBits** ! Rendez-vous sur flowbits.nl pour en savoir plus sur ce que vous pouvez faire avec FlowBits."
+        "welcome": "Bienvenue sur **FlowBits** ! Rendez-vous sur flowbits.nl pour en savoir plus sur ce que vous pouvez faire avec FlowBits.",
+        "mode_group_activated": "**__name__** est activé dans **__group__**.",
+        "mode_group_deactivated": "**__name__** est désactivé dans **__group__**."
     },
     "token": {
         "day_period": "Période de la journée (brut)",
@@ -109,7 +113,7 @@
         },
         "modes": {
             "title": "Modes",
-            "description": "Un seul mode peut être actif à la fois. Créez et gérez les modes via les actions, conditions et déclencheurs dans vos flows.",
+            "description": "Un seul mode peut être actif à la fois au sein d'un groupe. Créez et gérez les modes avec les actions, conditions et déclencheurs de mode dans vos flux.",
             "empty": "Aucun mode n’a encore été créé."
         },
         "sets": {
@@ -137,7 +141,8 @@
         },
         "card_statistics": {
             "title": "Statistiques des cartes de flux",
-            "description": "Voici les statistiques d'utilisation des cartes de flux individuelles."
+            "description": "Voici les statistiques d'utilisation des cartes de flux individuelles.",
+            "open": "Afficher les statistiques des cartes"
         }
     },
     "color": {

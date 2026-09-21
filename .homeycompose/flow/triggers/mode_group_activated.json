@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_activated",
+    "title": {
+        "en": "Mode activated in group",
+        "nl": "Stand geactiveerd in groep",
+        "de": "Modus aktiviert in Gruppe",
+        "fr": "Mode activé dans un groupe",
+        "it": "Modalità attivata in un gruppo",
+        "sv": "Läge aktiverat i grupp",
+        "no": "Modus aktivert i gruppe",
+        "es": "Modo activado en un grupo",
+        "da": "Tilstand aktiveret i gruppe",
+        "ru": "Режим активирован в группе",
+        "pl": "Tryb aktywowany w grupie",
+        "ko": "그룹에서 모드 활성화됨",
+        "ar": "تم تفعيل الوضع في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Mode [[name]] is activated in [[group]]",
+        "nl": "Stand [[name]] is geactiveerd in [[group]]",
+        "de": "Modus [[name]] ist aktiviert in [[group]]",
+        "fr": "Mode [[name]] est activé dans [[group]]",
+        "it": "Modalità [[name]] è attivata in [[group]]",
+        "sv": "Läge [[name]] är aktiverat i [[group]]",
+        "no": "Modus [[name]] er aktivert i [[group]]",
+        "es": "Modo [[name]] está activado en [[group]]",
+        "da": "Tilstand [[name]] er aktiveret i [[group]]",
+        "ru": "Режим [[name]] активирован в [[group]]",
+        "pl": "Tryb [[name]] został aktywowany w [[group]]",
+        "ko": "[[group]]에서 모드 [[name]]가 활성화됨",
+        "ar": "تم تفعيل وضع [[name]] في [[group]]"
+    },
+    "hint": {
+        "en": "Triggers when a mode gets activated. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Triggert wanneer een stand is geactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Löst aus, wenn ein Modus aktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Se déclenche lorsqu’un mode est activé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Si attiva quando una modalità viene attivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Utlöses när ett läge aktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Utløses når en modus aktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Se activa cuando un modo se activa. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Udløses når en tilstand aktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Срабатывает при активации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Wyzwalane, gdy tryb zostaje aktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "모드가 활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتم التفعيل عند تفعيل الوضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ]
+}

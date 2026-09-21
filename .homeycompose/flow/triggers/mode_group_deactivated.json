@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_deactivated",
+    "title": {
+        "en": "Mode deactivated in group",
+        "nl": "Stand gedeactiveerd in groep",
+        "de": "Modus deaktiviert in Gruppe",
+        "fr": "Mode désactivé dans un groupe",
+        "it": "Modalità disattivata in un gruppo",
+        "sv": "Läge inaktiverat i grupp",
+        "no": "Modus deaktivert i gruppe",
+        "es": "Modo desactivado en un grupo",
+        "da": "Tilstand deaktiveret i gruppe",
+        "ru": "Режим деактивирован в группе",
+        "pl": "Tryb dezaktywowany w grupie",
+        "ko": "그룹에서 모드 비활성화됨",
+        "ar": "الوضع الصامت في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Mode [[name]] is deactivated in [[group]]",
+        "nl": "Stand [[name]] is gedeactiveerd in [[group]]",
+        "de": "Modus [[name]] ist deaktiviert in [[group]]",
+        "fr": "Mode [[name]] est désactivé dans [[group]]",
+        "it": "Modalità [[name]] è disattivato in [[group]]",
+        "sv": "Läge [[name]] är inaktiverat i [[group]]",
+        "no": "Modus [[name]] er deaktivert i [[group]]",
+        "es": "Modo [[name]] está desactivado en [[group]]",
+        "da": "Tilstand [[name]] er deaktiveret i [[group]]",
+        "ru": "Режим [[name]] деактивирован в [[group]]",
+        "pl": "Tryb [[name]] jest dezaktywowany w [[group]]",
+        "ko": "[[group]]에서 모드 [[name]] 비활성화됨",
+        "ar": "الوضع [[name]] معطل في [[group]]"
+    },
+    "hint": {
+        "en": "Triggers when a mode gets deactivated. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Triggert wanneer een stand is gedeactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Löst aus, wenn ein Modus deaktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Se déclenche lorsqu’un mode est désactivé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Si attiva quando una modalità viene disattivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Utlöses när ett läge inaktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Utløses når en modus deaktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Se activa cuando un modo se desactiva. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Udløses når en tilstand deaktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Срабатывает при деактивации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Wyzwalane, gdy tryb zostaje dezaktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "모드가 비활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتم تحفيزه عندما يتم تعطيل الوضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ]
+}

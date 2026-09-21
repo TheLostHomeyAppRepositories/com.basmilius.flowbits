@@ -40,5 +40,8 @@ declare namespace Homey {
 declare global {
     interface Window {
         onHomeyReady(): void;
+
+        /** Resolves once homey.js has handed over. Set by the inline script in index.html. */
+        homeyReady: Promise<void>;
     }
 }

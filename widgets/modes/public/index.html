@@ -15,6 +15,7 @@
 <script type="text/javascript">
     function onHomeyReady(Homey) {
         const settings = Homey.getSettings();
+        const group = settings.group?.name ?? '';
 
         let lastResult = null;
         let ready = false;
@@ -55,7 +56,7 @@
             lastResult = null;
 
             try {
-                await Homey.api('POST', '/', {mode: mode.name});
+                await Homey.api('POST', '/', {mode: mode.name, group});
             } catch (err) {
                 console.error('Switching mode failed.', err);
             } finally {
@@ -69,7 +70,7 @@
 
         async function update() {
             const sequence = ++updateSequence;
-            const results = await Homey.api('GET', '/');
+            const results = await Homey.api('GET', `/?group=${encodeURIComponent(group)}`);
             let elements = [];
 
             // A later update already rendered a newer state; this response is stale.

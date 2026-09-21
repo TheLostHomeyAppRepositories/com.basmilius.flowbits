@@ -121,6 +121,13 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
         this.registry.action(Actions.ModeReactivate);
         this.registry.action(Actions.ModeReactivateCurrent);
         this.registry.action(Actions.ModeToggle);
+        this.registry.action(Actions.ModeGroupActivate);
+        this.registry.action(Actions.ModeGroupActivateFor);
+        this.registry.action(Actions.ModeGroupActivateForRevert);
+        this.registry.action(Actions.ModeGroupDeactivate);
+        this.registry.action(Actions.ModeGroupReactivate);
+        this.registry.action(Actions.ModeGroupReactivateCurrent);
+        this.registry.action(Actions.ModeGroupToggle);
         this.registry.action(Actions.NoRepeatClear);
         this.registry.action(Actions.RandomFact);
         this.registry.action(Actions.SetActivateAll);
@@ -168,6 +175,8 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
         this.registry.autocompleteProvider(AutocompleteProviders.Flag);
         this.registry.autocompleteProvider(AutocompleteProviders.Label);
         this.registry.autocompleteProvider(AutocompleteProviders.Mode);
+        this.registry.autocompleteProvider(AutocompleteProviders.ModeGroup);
+        this.registry.autocompleteProvider(AutocompleteProviders.ModeGroupMode);
         this.registry.autocompleteProvider(AutocompleteProviders.NoRepeat);
         this.registry.autocompleteProvider(AutocompleteProviders.SchoolVacation);
         this.registry.autocompleteProvider(AutocompleteProviders.Set);
@@ -198,6 +207,10 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
         this.registry.condition(Conditions.ModeIsActiveFor);
         this.registry.condition(Conditions.ModeIsInactiveFor);
         this.registry.condition(Conditions.ModeActive);
+        this.registry.condition(Conditions.ModeGroupActive);
+        this.registry.condition(Conditions.ModeGroupIs);
+        this.registry.condition(Conditions.ModeGroupIsActiveFor);
+        this.registry.condition(Conditions.ModeGroupIsInactiveFor);
         this.registry.condition(Conditions.MoonPhaseIs);
         this.registry.condition(Conditions.NoRepeatWindow);
         this.registry.condition(Conditions.SchoolHolidayIs);
@@ -231,6 +244,10 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
         this.registry.trigger(Triggers.ModeChanged);
         this.registry.trigger(Triggers.ModeCurrentChanged);
         this.registry.trigger(Triggers.ModeDeactivated);
+        this.registry.trigger(Triggers.ModeGroupActivated);
+        this.registry.trigger(Triggers.ModeGroupChanged);
+        this.registry.trigger(Triggers.ModeGroupCurrentChanged);
+        this.registry.trigger(Triggers.ModeGroupDeactivated);
         this.registry.trigger(Triggers.SetBecomesActiveAll);
         this.registry.trigger(Triggers.SetBecomesActiveAny);
         this.registry.trigger(Triggers.SetBecomesActiveAtLeast);

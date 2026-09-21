@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_activate",
+    "title": {
+        "en": "Activate mode in group",
+        "nl": "Activeer stand in groep",
+        "de": "Modus aktivieren in Gruppe",
+        "fr": "Activer le mode dans un groupe",
+        "it": "Attiva modalità in un gruppo",
+        "sv": "Aktivera läge i grupp",
+        "no": "Aktiver modus i gruppe",
+        "es": "Activar modo en un grupo",
+        "da": "Aktivér tilstand i gruppe",
+        "ru": "Активировать режим в группе",
+        "pl": "Aktywuj tryb w grupie",
+        "ko": "그룹에서 모드 활성화",
+        "ar": "تفعيل الوضع في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Activate [[name]] in [[group]]",
+        "nl": "Activeer [[name]] in [[group]]",
+        "de": "Aktiviere [[name]] in [[group]]",
+        "fr": "Activer [[name]] dans [[group]]",
+        "it": "Attiva [[name]] in [[group]]",
+        "sv": "Aktivera [[name]] i [[group]]",
+        "no": "Aktiver [[name]] i [[group]]",
+        "es": "Activar [[name]] en [[group]]",
+        "da": "Aktivér [[name]] i [[group]]",
+        "ru": "Активировать [[name]] в [[group]]",
+        "pl": "Aktywuj [[name]] w [[group]]",
+        "ko": "[[group]]에서 [[name]] 활성화",
+        "ar": "تفعيل [[name]] في [[group]]"
+    },
+    "hint": {
+        "en": "Activates a defined mode and deactivates all other modes. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Activeer een gedefinieerde stand en deactiveer alle andere standen. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Aktiviert einen definierten Modus und deaktiviert alle anderen Modi. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Active un mode défini et désactive tous les autres modes. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Attiva una modalità definita e disattiva tutte le altre modalità. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Aktiverar ett definierat läge och inaktiverar alla andra lägen. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Aktiverer en definert modus og deaktiverer alle andre modi. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Activa un modo definido y desactiva todos los demás modos. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Aktiverer en defineret tilstand og deaktiverer alle andre tilstande. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Активирует определенный режим и деактивирует все остальные режимы. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Aktywuje zdefiniowany tryb i dezaktywuje wszystkie inne tryby. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "정의된 모드를 활성화하고 다른 모든 모드를 비활성화합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يقوم بتفعيل وضع مُحدد وإلغاء تفعيل كل الأوضاع الأخرى. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ]
+}

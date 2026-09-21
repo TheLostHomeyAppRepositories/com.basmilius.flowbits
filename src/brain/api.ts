@@ -1,5 +1,6 @@
 import { Shortcuts } from '@basmilius/homey-common';
-import type { BitSet, Cycle, Event, Flag, FlowBitsApp, Label, Mode, NoRepeatWindow, Slider, Statistics, Timer } from '../types';
+import { DEFAULT_MODE_GROUP } from '../const';
+import type { BitSet, Cycle, Event, Flag, FlowBitsApp, Label, Mode, ModeGroup, NoRepeatWindow, Slider, Statistics, Timer } from '../types';
 
 export default class extends Shortcuts<FlowBitsApp> {
     async getCycles(): Promise<Cycle[]> {
@@ -94,62 +95,66 @@ export default class extends Shortcuts<FlowBitsApp> {
         return true;
     }
 
-    async activateMode(modeName: string): Promise<boolean> {
-        const mode = await this.app.modes.find(modeName);
+    async activateMode(modeName: string, group: string = DEFAULT_MODE_GROUP): Promise<boolean> {
+        const mode = await this.app.modes.findIn(group, modeName);
 
         if (!mode || mode.active) {
             return false;
         }
 
-        await this.app.modes.activate(mode.name);
+        await this.app.modes.activate(group, mode.name);
 
         return true;
     }
 
-    async deactivateMode(modeName: string): Promise<boolean> {
-        const mode = await this.app.modes.find(modeName);
+    async deactivateMode(modeName: string, group: string = DEFAULT_MODE_GROUP): Promise<boolean> {
+        const mode = await this.app.modes.findIn(group, modeName);
 
         if (!mode || !mode.active) {
             return false;
         }
 
-        await this.app.modes.deactivate(mode.name);
+        await this.app.modes.deactivate(group, mode.name);
 
         return true;
     }
 
-    async toggleMode(modeName: string): Promise<boolean> {
-        const mode = await this.app.modes.find(modeName);
+    async toggleMode(modeName: string, group: string = DEFAULT_MODE_GROUP): Promise<boolean> {
+        const mode = await this.app.modes.findIn(group, modeName);
 
         if (!mode) {
             return false;
         }
 
         if (mode.active) {
-            await this.app.modes.deactivate(mode.name);
+            await this.app.modes.deactivate(group, mode.name);
         } else {
-            await this.app.modes.activate(mode.name);
+            await this.app.modes.activate(group, mode.name);
         }
 
         return true;
     }
 
-    async getCurrentMode(): Promise<string | null> {
-        return this.app.modes.currentMode;
+    async getCurrentMode(group: string = DEFAULT_MODE_GROUP): Promise<string | null> {
+        return this.app.modes.currentModeIn(group);
     }
 
-    async getModes(): Promise<Mode[]> {
-        return await this.app.modes.findAll();
+    async getModes(group: string = DEFAULT_MODE_GROUP): Promise<Mode[]> {
+        return await this.app.modes.findAllIn(group);
     }
 
-    async setModeLook(modeName: string, color: string, icon: string): Promise<boolean> {
-        const mode = await this.app.modes.find(modeName);
+    async getModeGroups(): Promise<ModeGroup[]> {
+        return await this.app.modes.findAllGroups();
+    }
+
+    async setModeLook(modeName: string, color: string, icon: string, group: string = DEFAULT_MODE_GROUP): Promise<boolean> {
+        const mode = await this.app.modes.findIn(group, modeName);
 
         if (!mode) {
             return false;
         }
 
-        await this.app.modes.setLook(mode.name, [color, icon]);
+        await this.app.modes.setLookIn(group, mode.name, [color, icon]);
 
         return true;
     }
@@ -206,7 +211,7 @@ export default class extends Shortcuts<FlowBitsApp> {
             numberOfEvents: await this.app.events.count(),
             numberOfFlags: await this.app.flags.count(),
             numberOfLabels: await this.app.labels.count(),
-            numberOfModes: await this.app.modes.count(),
+            numberOfModes: await this.app.modes.countAll(),
             numberOfNoRepeats: await this.app.noRepeat.count(),
             numberOfSets: await this.app.sets.count(),
             numberOfSliders: await this.app.sliders.count(),

@@ -81,6 +81,33 @@ These flow cards let you manage modes directly from your flows, enabling you to 
     </FlowCardExplainer>
 </FlowCards>
 
+## Groups <VPBadge type="info" text="1.20.0+"/>
+
+A group holds its own modes, and every group runs independently of the others. One group can track *Home/Away/Night* while another tracks *Sleeping/Evening/Daytime*, without the two ever cancelling each other out.
+
+Inside a group the rules are the same as before: only one mode can be active at a time, and switching replaces the previous one.
+
+Every mode card has a grouped counterpart that takes a group as its first argument. Type a new group name into the group field to create it, the same way you create a mode.
+
+<FlowCards>
+    <FlowCardExplainer content="Activate a mode inside a group. The other groups keep whatever mode they had.">
+        <FlowCard type="action">Activate <strong>Evening</strong> in <strong>Lighting</strong></FlowCard>
+    </FlowCardExplainer>
+    <FlowCardExplainer content="Activate a mode in a group for a while, then revert to the mode that was active before.">
+        <FlowCard type="action">Activate <strong>Away</strong> in <strong>House state</strong> for <strong>2</strong> <strong>hours</strong> and revert</FlowCard>
+    </FlowCardExplainer>
+    <FlowCardExplainer content="Checks the mode of one group, ignoring the others.">
+        <FlowCard type="condition"><strong>Sleeping</strong> is active in <strong>Lighting</strong></FlowCard>
+    </FlowCardExplainer>
+    <FlowCardExplainer content="Triggers when the mode of one group changes. The mode token holds the new mode.">
+        <FlowCard type="trigger">The current mode changed in <strong>Lighting</strong></FlowCard>
+    </FlowCardExplainer>
+</FlowCards>
+
+The cards without a group field keep working as they always have. They act on the modes that are not in a group, which is where your existing modes live. Nothing needs to move.
+
+Colors and icons are set per group in the app settings, so the same mode name can look different in two groups. The Modes and Current mode widgets each take a group in their settings; leave it empty for the ungrouped modes.
+
 ## Examples
 
 ### **Home / Away**
@@ -98,7 +125,8 @@ Activate *Party* mode for special lighting scenes or extended music playback.
 
 ## Notes
 
-- Modes are mutually exclusive: only one can be active at any time.
+- Modes are mutually exclusive within their group: only one can be active at any time.
+- Groups are independent: a mode in one group never deactivates a mode in another.
 - Flows can both change modes and react to them.
 - Use clear names to keep your automation logic readable.
 - The duration-based conditions can be inverted (using the condition's invert option) to check for "less than" instead of "at least".

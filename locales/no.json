@@ -10,12 +10,16 @@
     "set_state_new": "Ny set-tilstand i denne flyten...",
     "signal_new": "Nytt signal i denne flyten",
     "slider_new": "Ny skyver i denne flyten",
-    "timer_new": "Ny timer i denne flyten"
+    "timer_new": "Ny timer i denne flyten",
+    "mode_group_new": "Ny gruppe i denne flyten",
+    "mode_group_mode_new": "Ny modus i denne gruppen, blir kjent når flyten lagres"
   },
   "notification": {
     "mode_activated": "**__name__** er aktivert.",
     "mode_deactivated": "**__name__** er deaktivert.",
-    "welcome": "Velkommen til **FlowBits**! Gå til flowbits.nl for å lære mer om hva du kan gjøre med FlowBits."
+    "welcome": "Velkommen til **FlowBits**! Gå til flowbits.nl for å lære mer om hva du kan gjøre med FlowBits.",
+    "mode_group_activated": "**__name__** er aktivert i **__group__**.",
+    "mode_group_deactivated": "**__name__** er deaktivert i **__group__**."
   },
   "token": {
     "day_period": "Dagsperiode (rå)",
@@ -105,7 +109,7 @@
     },
     "modes": {
       "title": "Moduser",
-      "description": "Bare én modus kan være aktiv om gangen. Opprett og administrer moduser via handlinger, betingelser og triggere i dine flyter.",
+      "description": "Innenfor en gruppe kan bare én modus være aktiv om gangen. Opprett og administrer moduser med modushandlinger, betingelser og utløsere i flytene dine.",
       "empty": "Ingen moduser har blitt opprettet enda."
     },
     "sets": {
@@ -133,7 +137,8 @@
     },
     "card_statistics": {
       "title": "Flytkortstatistikk",
-      "description": "Dette er bruksstatistikk for individuelle flytkort."
+      "description": "Dette er bruksstatistikk for individuelle flytkort.",
+      "open": "Vis statistikk for flytkort"
     },
     "documentation": {
       "title": "Dokumentasjon",

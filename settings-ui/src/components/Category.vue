@@ -22,6 +22,12 @@
                     {{ item.name }}
                 </span>
 
+                <span
+                    v-if="item.caption"
+                    :class="$style.categoryItemCaptionSecondary">
+                    {{ item.caption }}
+                </span>
+
                 <Icon
                     icon=""
                     style="--size: 16px"/>
@@ -101,6 +107,11 @@
     .categoryItemCaption {
         flex-grow: 1;
         font-weight: 500;
+    }
+
+    .categoryItemCaptionSecondary {
+        color: var(--homey-color-mono-70);
+        font-size: 0.875em;
     }
 
     .categoryItemIcon {

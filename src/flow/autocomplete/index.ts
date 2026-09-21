@@ -3,6 +3,8 @@ export { default as Event } from './event';
 export { default as Flag } from './flag';
 export { default as Label } from './label';
 export { default as Mode } from './mode';
+export { default as ModeGroup } from './modeGroup';
+export { default as ModeGroupMode } from './modeGroupMode';
 export { default as NoRepeat } from './noRepeat';
 export { default as SchoolVacation } from './schoolVacation';
 export { default as Set } from './set';

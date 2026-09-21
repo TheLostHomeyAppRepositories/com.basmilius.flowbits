@@ -1,109 +1,162 @@
 import { DateTime, Shortcuts } from '@basmilius/homey-common';
-import { MAX_TIMEOUT_MS, REALTIME_MODE_UPDATE, SETTING_MODE, SETTING_MODE_EXPIRES_AT, SETTING_MODE_LAST_UPDATES, SETTING_MODE_LOOKS, SETTING_MODE_REVERT_TO } from '../const';
+import { DEFAULT_MODE_GROUP, MAX_TIMEOUT_MS, REALTIME_MODE_UPDATE, SETTING_MODE, SETTING_MODE_EXPIRES_AT, SETTING_MODE_GROUPS_MIGRATED, SETTING_MODE_LAST_UPDATES, SETTING_MODE_LOOKS, SETTING_MODE_REVERT_TO } from '../const';
 import { AutocompleteProviders, Triggers } from '../flow';
-import type { ClockUnit, Feature, FlowBitsApp, Look, Mode, Styleable } from '../types';
+import type { ClockUnit, Feature, FlowBitsApp, Look, Mode, ModeGroup } from '../types';
 import { convertDurationToMs } from '../util';
 
-export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mode>, Styleable {
-    #expirationTimeout: NodeJS.Timeout | null = null;
+export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mode> {
+    readonly #expirationTimeouts: Map<string, NodeJS.Timeout> = new Map();
 
-    get currentMode(): string | null {
-        return this.settings.get(SETTING_MODE);
+    get current(): Record<string, string | null> {
+        return this.settings.get(SETTING_MODE) ?? {};
     }
 
-    set currentMode(value: string | null) {
+    set current(value: Record<string, string | null>) {
         this.settings.set(SETTING_MODE, value);
     }
 
-    get expiresAt(): DateTime | null {
-        const value = this.settings.get(SETTING_MODE_EXPIRES_AT);
-
-        return value ? DateTime.fromISO(value) : null;
+    /** The mode active in the default group, which is what the ungrouped flow cards act on. */
+    get currentMode(): string | null {
+        return this.currentModeIn(DEFAULT_MODE_GROUP);
     }
 
-    set expiresAt(value: DateTime | null) {
-        this.settings.set(SETTING_MODE_EXPIRES_AT, value?.toISO() ?? null);
-    }
-
-    get revertTo(): string | null {
-        return this.settings.get(SETTING_MODE_REVERT_TO) ?? null;
-    }
-
-    set revertTo(value: string | null) {
-        this.settings.set(SETTING_MODE_REVERT_TO, value);
-    }
-
-    get looks(): Record<string, Look> {
-        return this.settings.get(SETTING_MODE_LOOKS) ?? {};
-    }
-
-    set looks(value: Record<string, Look>) {
-        this.settings.set(SETTING_MODE_LOOKS, value);
-    }
-
-    get lastUpdates(): Record<string, DateTime> {
+    get expiresAt(): Record<string, DateTime | null> {
         return Object.fromEntries(
-            Object.entries<string>(this.settings.get(SETTING_MODE_LAST_UPDATES) ?? {})
-                .map(([key, value]) => [
-                    key,
-                    DateTime.fromISO(value)
+            Object.entries<string | null>(this.settings.get(SETTING_MODE_EXPIRES_AT) ?? {})
+                .map(([group, value]) => [
+                    group,
+                    value ? DateTime.fromISO(value) : null
                 ])
         );
     }
 
-    set lastUpdates(value: Record<string, DateTime>) {
+    set expiresAt(value: Record<string, DateTime | null>) {
+        this.settings.set(SETTING_MODE_EXPIRES_AT, Object.fromEntries(
+            Object.entries(value)
+                .map(([group, dateTime]) => [
+                    group,
+                    dateTime?.toISO() ?? null
+                ])
+        ));
+    }
+
+    get revertTo(): Record<string, string | null> {
+        return this.settings.get(SETTING_MODE_REVERT_TO) ?? {};
+    }
+
+    set revertTo(value: Record<string, string | null>) {
+        this.settings.set(SETTING_MODE_REVERT_TO, value);
+    }
+
+    get looks(): Record<string, Record<string, Look>> {
+        return this.settings.get(SETTING_MODE_LOOKS) ?? {};
+    }
+
+    set looks(value: Record<string, Record<string, Look>>) {
+        this.settings.set(SETTING_MODE_LOOKS, value);
+    }
+
+    get lastUpdates(): Record<string, Record<string, DateTime>> {
+        return Object.fromEntries(
+            Object.entries<Record<string, string>>(this.settings.get(SETTING_MODE_LAST_UPDATES) ?? {})
+                .map(([group, modes]) => [
+                    group,
+                    Object.fromEntries(
+                        Object.entries(modes)
+                            .map(([name, value]) => [name, DateTime.fromISO(value)])
+                    )
+                ])
+        );
+    }
+
+    set lastUpdates(value: Record<string, Record<string, DateTime>>) {
         this.settings.set(SETTING_MODE_LAST_UPDATES, Object.fromEntries(
             Object.entries(value)
-                .map(([key, value]) => [
-                    key,
-                    value.toISO()
+                .map(([group, modes]) => [
+                    group,
+                    Object.fromEntries(
+                        Object.entries(modes)
+                            .map(([name, dateTime]) => [name, dateTime.toISO()])
+                    )
                 ])
         ));
     }
 
     async initialize(): Promise<void> {
-        await this.#scheduleExpiration();
+        this.#migrateUngroupedSettings();
+
+        for (const group of this.#storedGroups()) {
+            await this.#scheduleExpiration(group);
+        }
     }
 
     async cleanup(): Promise<void> {
         this.log('Cleaning up unused modes...');
 
-        const defined = await this.findAll();
+        const defined = await this.#definedModes();
+        const current = this.current;
+        const expiresAt = this.expiresAt;
+        const revertTo = this.revertTo;
         const looks = this.looks;
         const lastUpdates = this.lastUpdates;
 
-        if (this.currentMode && !defined.find(d => d.name === this.currentMode)) {
-            this.currentMode = null;
-            this.expiresAt = null;
-            this.revertTo = null;
-        }
+        for (const group of this.#storedGroups()) {
+            const modes = defined.get(group) ?? new Set<string>();
 
-        if (this.revertTo && !defined.find(d => d.name === this.revertTo)) {
-            this.revertTo = null;
-        }
+            // The default group outlives its cards: it is where ungrouped flow cards act.
+            if (modes.size === 0 && group !== DEFAULT_MODE_GROUP) {
+                this.log(`Deleting unused mode group ${group}...`);
 
-        for (const key of Object.keys(this.looks)) {
-            if (defined.find(d => d.name === key)) {
+                delete current[group];
+                delete expiresAt[group];
+                delete revertTo[group];
+                delete looks[group];
+                delete lastUpdates[group];
+
                 continue;
             }
 
-            this.log(`Deleting unused mode look ${key}...`);
-            delete looks[key];
-        }
-
-        for (const key of Object.keys(this.lastUpdates)) {
-            if (defined.find(d => d.name === key)) {
-                continue;
+            if (current[group] && !modes.has(current[group]!)) {
+                current[group] = null;
+                expiresAt[group] = null;
+                revertTo[group] = null;
             }
 
-            this.log(`Deleting unused mode last update ${key}...`);
-            delete lastUpdates[key];
+            if (revertTo[group] && !modes.has(revertTo[group]!)) {
+                revertTo[group] = null;
+            }
+
+            const groupLooks = looks[group] ?? {};
+            const groupUpdates = lastUpdates[group] ?? {};
+
+            for (const name of Object.keys(groupLooks)) {
+                if (modes.has(name)) {
+                    continue;
+                }
+
+                this.log(`Deleting unused mode look ${group}/${name}...`);
+                delete groupLooks[name];
+            }
+
+            for (const name of Object.keys(groupUpdates)) {
+                if (modes.has(name)) {
+                    continue;
+                }
+
+                this.log(`Deleting unused mode last update ${group}/${name}...`);
+                delete groupUpdates[name];
+            }
         }
 
+        this.current = current;
+        this.expiresAt = expiresAt;
+        this.revertTo = revertTo;
         this.looks = looks;
         this.lastUpdates = lastUpdates;
 
-        await this.#scheduleExpiration();
+        for (const group of this.#storedGroups()) {
+            await this.#scheduleExpiration(group);
+        }
     }
 
     async count(): Promise<number> {
@@ -112,202 +165,202 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         return modes.length;
     }
 
-    async find(name: string): Promise<Mode | null> {
-        const modes = await this.findAll();
-        const mode = modes.find(mode => mode.name === name);
+    /**
+     * Returns the number of modes across every group.
+     */
+    async countAll(): Promise<number> {
+        const groups = await this.findAllGroups();
 
-        return mode ?? null;
+        return groups.reduce((total, group) => total + group.modes.length, 0);
+    }
+
+    async find(name: string): Promise<Mode | null> {
+        return this.findIn(DEFAULT_MODE_GROUP, name);
     }
 
     async findAll(): Promise<Mode[]> {
-        const provider = this.#autocompleteProvider();
-        const current = this.currentMode;
-        const lastUpdates = this.lastUpdates;
-        const modes = await provider.find('');
-
-        if (modes.length === 0) {
-            return [];
-        }
-
-        return modes.map(mode => {
-            const look = this.getLook(mode.name);
-            const lastUpdate = lastUpdates[mode.name];
-
-            return {
-                active: current === mode.name,
-                color: look[0],
-                icon: look[1],
-                lastUpdate: lastUpdate?.toISO() ?? undefined,
-                name: mode.name
-            };
-        });
+        return this.findAllIn(DEFAULT_MODE_GROUP);
     }
 
-    async activate(name: string): Promise<void> {
-        const current = this.currentMode;
+    /**
+     * Returns every group that has modes defined on a flow card, plus the default group.
+     */
+    async findAllGroups(): Promise<ModeGroup[]> {
+        const defined = await this.#definedModes();
+
+        return [...defined.entries()]
+            .map(([name, modes]) => ({
+                name,
+                currentMode: this.currentModeIn(name),
+                modes: this.#mapModes(name, modes)
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    async findAllIn(group: string): Promise<Mode[]> {
+        const defined = await this.#definedModes();
+
+        return this.#mapModes(group, defined.get(group));
+    }
+
+    async findIn(group: string, name: string): Promise<Mode | null> {
+        const modes = await this.findAllIn(group);
+
+        return modes.find(mode => mode.name === name) ?? null;
+    }
+
+    currentModeIn(group: string): string | null {
+        return this.current[group] ?? null;
+    }
+
+    async activate(group: string, name: string): Promise<void> {
+        const current = this.currentModeIn(group);
 
         if (!name) {
             return;
         }
 
         // An open-ended activation cancels any pending timed deactivation or revert.
-        this.#clearExpiration();
+        this.#clearExpiration(group);
 
         if (current === name) {
             return;
         }
 
-        this.currentMode = name;
+        this.#setCurrent(group, name);
+        this.#touch(group, name, current);
 
-        const now = DateTime.now();
-        const updates = {...this.lastUpdates, [name]: now};
-
-        // Also update the timestamp for the previously active mode
-        if (current !== null) {
-            updates[current] = now;
-        }
-
-        this.lastUpdates = updates;
-
-        this.log(`Activate mode ${name}.`);
+        this.log(`Activate mode ${name} in group ${group}.`);
 
         // Emit the UI update first so widgets reflect the switch immediately,
         // instead of waiting on the (potentially slow) timeline notifications below.
         await this.#triggerRealtime();
 
         if (current !== null) {
-            await this.#triggerDeactivated(current);
+            await this.#triggerDeactivated(group, current);
         }
 
         const triggers = [
-            this.#triggerCurrentChanged(name),
-            this.#triggerActivated(name),
-            this.#triggerChanged(name, true)
+            this.#triggerCurrentChanged(group, name),
+            this.#triggerActivated(group, name),
+            this.#triggerChanged(group, name, true)
         ];
 
         if (current !== null) {
-            triggers.push(this.#triggerChanged(current, false));
+            triggers.push(this.#triggerChanged(group, current, false));
         }
 
         await Promise.allSettled(triggers);
     }
 
-    async deactivate(name: string): Promise<void> {
-        const current = this.currentMode;
+    async deactivate(group: string, name: string): Promise<void> {
+        const current = this.currentModeIn(group);
 
         if (!name || current !== name) {
             return;
         }
 
-        this.#clearExpiration();
+        this.#clearExpiration(group);
+        this.#setCurrent(group, null);
+        this.#touch(group, name);
 
-        this.currentMode = null;
-        this.lastUpdates = {
-            ...this.lastUpdates,
-            [name]: DateTime.now()
-        };
-
-        this.log(`Deactivate mode ${name}.`);
+        this.log(`Deactivate mode ${name} in group ${group}.`);
 
         await Promise.allSettled([
             this.#triggerRealtime(),
-            this.#triggerDeactivated(name),
-            this.#triggerChanged(name, false),
-            this.#triggerCurrentChanged(null)
+            this.#triggerDeactivated(group, name),
+            this.#triggerChanged(group, name, false),
+            this.#triggerCurrentChanged(group, null)
         ]);
     }
 
-    async reactivate(name: string): Promise<void> {
+    async reactivate(group: string, name: string): Promise<void> {
         if (!name) {
             return;
         }
 
-        this.#clearExpiration();
+        this.#clearExpiration(group);
+        this.#setCurrent(group, name);
+        this.#touch(group, name);
 
-        this.currentMode = name;
-        this.lastUpdates = {
-            ...this.lastUpdates,
-            [name]: DateTime.now()
-        };
-
-        this.log(`Reactivate mode ${name}.`);
+        this.log(`Reactivate mode ${name} in group ${group}.`);
 
         await Promise.allSettled([
             this.#triggerRealtime(),
-            this.#triggerActivated(name),
-            this.#triggerChanged(name, true),
-            this.#triggerCurrentChanged(name)
+            this.#triggerActivated(group, name),
+            this.#triggerChanged(group, name, true),
+            this.#triggerCurrentChanged(group, name)
         ]);
     }
 
-    async reactivateCurrent(): Promise<void> {
-        const current = this.currentMode;
+    async reactivateCurrent(group: string): Promise<void> {
+        const current = this.currentModeIn(group);
 
         if (current === null) {
-            this.log('No current mode to reactivate.');
+            this.log(`No current mode to reactivate in group ${group}.`);
             return;
         }
 
-        await this.reactivate(current);
+        await this.reactivate(group, current);
     }
 
-    async toggle(name: string): Promise<void> {
-        if (this.currentMode === name) {
-            await this.deactivate(name);
+    async toggle(group: string, name: string): Promise<void> {
+        if (this.currentModeIn(group) === name) {
+            await this.deactivate(group, name);
         } else {
-            await this.activate(name);
+            await this.activate(group, name);
         }
     }
 
-    async activateFor(name: string, duration: number, unit: ClockUnit): Promise<void> {
+    async activateFor(group: string, name: string, duration: number, unit: ClockUnit): Promise<void> {
         if (!name) {
             return;
         }
 
         // Activate the mode (clears any previous expiration/revert)
-        await this.activate(name);
+        await this.activate(group, name);
 
         // Schedule plain deactivation; no mode is restored afterwards.
-        this.expiresAt = DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)});
-        this.revertTo = null;
+        this.#setExpiresAt(group, DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)}));
+        this.#setRevertTo(group, null);
 
-        await this.#scheduleExpiration();
+        await this.#scheduleExpiration(group);
 
-        this.log(`Activated mode ${name} for ${duration} ${unit}.`);
+        this.log(`Activated mode ${name} in group ${group} for ${duration} ${unit}.`);
     }
 
-    async activateForRevert(name: string, duration: number, unit: ClockUnit): Promise<void> {
+    async activateForRevert(group: string, name: string, duration: number, unit: ClockUnit): Promise<void> {
         if (!name) {
             return;
         }
 
         // Remember the mode that was active before switching, so it can be restored.
-        const previous = this.currentMode;
+        const previous = this.currentModeIn(group);
 
         // Activate the mode (clears any previous expiration/revert)
-        await this.activate(name);
+        await this.activate(group, name);
 
         if (previous === name) {
-            this.log(`Mode ${name} was already active, so there is nothing to revert to.`);
+            this.log(`Mode ${name} was already active in group ${group}, so there is nothing to revert to.`);
             return;
         }
 
-        this.expiresAt = DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)});
-        this.revertTo = previous;
+        this.#setExpiresAt(group, DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)}));
+        this.#setRevertTo(group, previous);
 
-        await this.#scheduleExpiration();
+        await this.#scheduleExpiration(group);
 
-        this.log(`Activated mode ${name} for ${duration} ${unit}, reverting to ${previous ?? 'no mode'} afterwards.`);
+        this.log(`Activated mode ${name} in group ${group} for ${duration} ${unit}, reverting to ${previous ?? 'no mode'} afterwards.`);
     }
 
-    async isActiveFor(name: string, duration: number, unit: ClockUnit): Promise<boolean> {
-        const lastUpdate = this.lastUpdates[name];
+    async isActiveFor(group: string, name: string, duration: number, unit: ClockUnit): Promise<boolean> {
+        const lastUpdate = this.lastUpdates[group]?.[name];
 
         if (!lastUpdate) {
             return false;
         }
 
-        const isActive = this.currentMode === name;
+        const isActive = this.currentModeIn(group) === name;
 
         if (!isActive) {
             return false;
@@ -319,15 +372,15 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         return lastUpdate <= cutoff;
     }
 
-    async isInactiveFor(name: string, duration: number, unit: ClockUnit): Promise<boolean> {
-        const lastUpdate = this.lastUpdates[name];
+    async isInactiveFor(group: string, name: string, duration: number, unit: ClockUnit): Promise<boolean> {
+        const lastUpdate = this.lastUpdates[group]?.[name];
 
         if (!lastUpdate) {
             // If there's no lastUpdate, the mode has never been touched, so consider it inactive forever
             return true;
         }
 
-        const isActive = this.currentMode === name;
+        const isActive = this.currentModeIn(group) === name;
 
         if (isActive) {
             return false;
@@ -340,13 +393,26 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
     }
 
     getLook(name: string): Look {
-        return this.looks[name] ?? ['#204ef6', ''];
+        return this.getLookIn(DEFAULT_MODE_GROUP, name);
+    }
+
+    getLookIn(group: string, name: string): Look {
+        return this.looks[group]?.[name] ?? ['#204ef6', ''];
     }
 
     async setLook(name: string, look: Look): Promise<void> {
+        await this.setLookIn(DEFAULT_MODE_GROUP, name, look);
+    }
+
+    async setLookIn(group: string, name: string, look: Look): Promise<void> {
+        const looks = this.looks;
+
         this.looks = {
-            ...this.looks,
-            [name]: look
+            ...looks,
+            [group]: {
+                ...looks[group] ?? {},
+                [name]: look
+            }
         };
 
         await this.#triggerRealtime();
@@ -356,29 +422,108 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         await this.#triggerRealtime();
     }
 
-    #clearExpiration(): void {
-        if (this.#expirationTimeout) {
-            this.clearTimeout(this.#expirationTimeout);
-            this.#expirationTimeout = null;
+    #clearExpiration(group: string): void {
+        const timeout = this.#expirationTimeouts.get(group);
+
+        if (timeout) {
+            this.clearTimeout(timeout);
+            this.#expirationTimeouts.delete(group);
         }
 
-        if (this.expiresAt !== null) {
-            this.expiresAt = null;
+        if (this.expiresAt[group] != null) {
+            this.#setExpiresAt(group, null);
         }
 
-        if (this.revertTo !== null) {
-            this.revertTo = null;
+        if (this.revertTo[group] != null) {
+            this.#setRevertTo(group, null);
         }
     }
 
-    async #scheduleExpiration(): Promise<void> {
-        if (this.#expirationTimeout) {
-            this.clearTimeout(this.#expirationTimeout);
-            this.#expirationTimeout = null;
+    /**
+     * Collects the modes defined on flow cards, keyed by group. The default group is always
+     * present, so its stored state survives even when no mode card mentions a mode yet.
+     */
+    async #definedModes(): Promise<Map<string, Set<string>>> {
+        const ungrouped = await this.#autocompleteProvider().find('');
+        const defined = new Map<string, Set<string>>();
+
+        defined.set(DEFAULT_MODE_GROUP, new Set(ungrouped.map(mode => mode.name)));
+
+        for (const [group, modes] of this.#groupedAutocompleteProvider().definedModes()) {
+            const existing = defined.get(group);
+
+            if (existing) {
+                modes.forEach(mode => existing.add(mode));
+                continue;
+            }
+
+            defined.set(group, new Set(modes));
         }
 
-        const current = this.currentMode;
-        const expiresAt = this.expiresAt;
+        return defined;
+    }
+
+    /**
+     * Moves the pre-groups settings into the default group. Before groups every setting held a
+     * single mode's worth of state; afterwards each one is keyed by group. Guarded by a flag
+     * rather than by the shape of the data, because a home that never activated a mode still has
+     * looks to move.
+     */
+    #migrateUngroupedSettings(): void {
+        if (this.settings.get(SETTING_MODE_GROUPS_MIGRATED) === true) {
+            return;
+        }
+
+        this.log('Migrating modes to the default group...');
+
+        const current = this.settings.get(SETTING_MODE) as string | null;
+        const expiresAt = this.settings.get(SETTING_MODE_EXPIRES_AT) as string | null;
+        const revertTo = this.settings.get(SETTING_MODE_REVERT_TO) as string | null;
+        const looks = this.settings.get(SETTING_MODE_LOOKS) ?? {};
+        const lastUpdates = this.settings.get(SETTING_MODE_LAST_UPDATES) ?? {};
+
+        this.settings.set(SETTING_MODE, {[DEFAULT_MODE_GROUP]: current ?? null});
+        this.settings.set(SETTING_MODE_EXPIRES_AT, {[DEFAULT_MODE_GROUP]: expiresAt ?? null});
+        this.settings.set(SETTING_MODE_REVERT_TO, {[DEFAULT_MODE_GROUP]: revertTo ?? null});
+        this.settings.set(SETTING_MODE_LOOKS, {[DEFAULT_MODE_GROUP]: looks});
+        this.settings.set(SETTING_MODE_LAST_UPDATES, {[DEFAULT_MODE_GROUP]: lastUpdates});
+        this.settings.set(SETTING_MODE_GROUPS_MIGRATED, true);
+    }
+
+    async #processExpiration(group: string): Promise<void> {
+        const current = this.currentModeIn(group);
+        const expiresAt = this.expiresAt[group] ?? null;
+
+        if (!current || !expiresAt) {
+            return;
+        }
+
+        // Safety net: the timeout may have fired early due to the MAX_TIMEOUT_MS cap.
+        if (expiresAt > DateTime.now()) {
+            await this.#scheduleExpiration(group);
+            return;
+        }
+
+        const revertTo = this.revertTo[group] ?? null;
+
+        if (revertTo) {
+            // Restore the previously active mode instead of leaving no mode active.
+            await this.activate(group, revertTo);
+        } else {
+            await this.deactivate(group, current);
+        }
+    }
+
+    async #scheduleExpiration(group: string): Promise<void> {
+        const pending = this.#expirationTimeouts.get(group);
+
+        if (pending) {
+            this.clearTimeout(pending);
+            this.#expirationTimeouts.delete(group);
+        }
+
+        const current = this.currentModeIn(group);
+        const expiresAt = this.expiresAt[group] ?? null;
 
         if (!current || !expiresAt) {
             return;
@@ -387,60 +532,122 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         const diff = expiresAt.diff(DateTime.now()).as('milliseconds');
 
         if (diff <= 0) {
-            await this.#processExpiration();
+            await this.#processExpiration(group);
             return;
         }
 
         const delay = Math.min(diff, MAX_TIMEOUT_MS);
 
-        this.#expirationTimeout = this.setTimeout(async () => {
-            this.#expirationTimeout = null;
-            await this.#processExpiration();
-        }, delay);
+        this.#expirationTimeouts.set(group, this.setTimeout(async () => {
+            this.#expirationTimeouts.delete(group);
+            await this.#processExpiration(group);
+        }, delay));
 
-        this.log(`Scheduled mode expiration check in ${Math.round(delay / 1000)}s.`);
+        this.log(`Scheduled mode expiration check for group ${group} in ${Math.round(delay / 1000)}s.`);
     }
 
-    async #processExpiration(): Promise<void> {
-        const current = this.currentMode;
-        const expiresAt = this.expiresAt;
+    #setCurrent(group: string, name: string | null): void {
+        this.current = {...this.current, [group]: name};
+    }
 
-        if (!current || !expiresAt) {
+    #setExpiresAt(group: string, value: DateTime | null): void {
+        this.expiresAt = {...this.expiresAt, [group]: value};
+    }
+
+    #setRevertTo(group: string, value: string | null): void {
+        this.revertTo = {...this.revertTo, [group]: value};
+    }
+
+    /**
+     * Returns the groups that have state on disk, which is not the same as the groups that are
+     * defined on a flow card. Cleanup needs the stored ones so it can drop the leftovers.
+     */
+    #storedGroups(): string[] {
+        return [...new Set([
+            DEFAULT_MODE_GROUP,
+            ...Object.keys(this.current),
+            ...Object.keys(this.expiresAt),
+            ...Object.keys(this.revertTo),
+            ...Object.keys(this.looks),
+            ...Object.keys(this.lastUpdates)
+        ])];
+    }
+
+    #mapModes(group: string, names: Set<string> | undefined): Mode[] {
+        if (!names || names.size === 0) {
+            return [];
+        }
+
+        const current = this.currentModeIn(group);
+        const lastUpdates = this.lastUpdates[group] ?? {};
+
+        return [...names].map(name => {
+            const look = this.getLookIn(group, name);
+
+            return {
+                active: current === name,
+                color: look[0],
+                icon: look[1],
+                lastUpdate: lastUpdates[name]?.toISO() ?? undefined,
+                name
+            };
+        });
+    }
+
+    /**
+     * Stamps the mode as changed. The mode being switched away from is stamped too, so the
+     * "inactive for" condition measures from the moment it actually went inactive.
+     */
+    #touch(group: string, name: string, previousName: string | null = null): void {
+        const now = DateTime.now();
+        const lastUpdates = this.lastUpdates;
+        const groupUpdates = {...lastUpdates[group] ?? {}, [name]: now};
+
+        if (previousName !== null) {
+            groupUpdates[previousName] = now;
+        }
+
+        this.lastUpdates = {...lastUpdates, [group]: groupUpdates};
+    }
+
+    async #triggerActivated(group: string, name: string): Promise<void> {
+        if (group === DEFAULT_MODE_GROUP) {
+            await this.registry.fireTrigger(Triggers.ModeActivated, {name});
+            await this.notify(this.translate('notification.mode_activated', {name}));
             return;
         }
 
-        // Safety net: the timeout may have fired early due to the MAX_TIMEOUT_MS cap.
-        if (expiresAt > DateTime.now()) {
-            await this.#scheduleExpiration();
+        await this.registry.fireTrigger(Triggers.ModeGroupActivated, {group, name});
+        await this.notify(this.translate('notification.mode_group_activated', {name, group}));
+    }
+
+    async #triggerChanged(group: string, name: string, active: boolean): Promise<void> {
+        if (group === DEFAULT_MODE_GROUP) {
+            await this.registry.fireTrigger(Triggers.ModeChanged, {name}, {active});
             return;
         }
 
-        const revertTo = this.revertTo;
+        await this.registry.fireTrigger(Triggers.ModeGroupChanged, {group, name}, {active});
+    }
 
-        if (revertTo) {
-            // Restore the previously active mode instead of leaving no mode active.
-            await this.activate(revertTo);
-        } else {
-            await this.deactivate(current);
+    async #triggerCurrentChanged(group: string, name: string | null): Promise<void> {
+        if (group === DEFAULT_MODE_GROUP) {
+            await this.registry.fireTrigger(Triggers.ModeCurrentChanged, {}, {mode: name ?? '-'});
+            return;
         }
+
+        await this.registry.fireTrigger(Triggers.ModeGroupCurrentChanged, {group}, {mode: name ?? '-'});
     }
 
-    async #triggerActivated(name: string): Promise<void> {
-        await this.registry.fireTrigger(Triggers.ModeActivated, {name});
-        await this.notify(this.translate('notification.mode_activated', {name}));
-    }
+    async #triggerDeactivated(group: string, name: string): Promise<void> {
+        if (group === DEFAULT_MODE_GROUP) {
+            await this.registry.fireTrigger(Triggers.ModeDeactivated, {name});
+            await this.notify(this.translate('notification.mode_deactivated', {name}));
+            return;
+        }
 
-    async #triggerChanged(name: string, active: boolean): Promise<void> {
-        await this.registry.fireTrigger(Triggers.ModeChanged, {name}, {active});
-    }
-
-    async #triggerCurrentChanged(name: string | null): Promise<void> {
-        await this.registry.fireTrigger(Triggers.ModeCurrentChanged, {}, {mode: name ?? '-'});
-    }
-
-    async #triggerDeactivated(name: string): Promise<void> {
-        await this.registry.fireTrigger(Triggers.ModeDeactivated, {name});
-        await this.notify(this.translate('notification.mode_deactivated', {name}));
+        await this.registry.fireTrigger(Triggers.ModeGroupDeactivated, {group, name});
+        await this.notify(this.translate('notification.mode_group_deactivated', {name, group}));
     }
 
     async #triggerRealtime(): Promise<void> {
@@ -452,6 +659,16 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
 
         if (!provider) {
             throw new Error('Failed to get the mode autocomplete provider.');
+        }
+
+        return provider;
+    }
+
+    #groupedAutocompleteProvider(): AutocompleteProviders.ModeGroupMode {
+        const provider = this.registry.findAutocompleteProvider(AutocompleteProviders.ModeGroupMode);
+
+        if (!provider) {
+            throw new Error('Failed to get the mode group mode autocomplete provider.');
         }
 
         return provider;

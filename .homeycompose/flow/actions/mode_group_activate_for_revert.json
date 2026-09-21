@@ -1,0 +1,235 @@
+{
+    "id": "mode_group_activate_for_revert",
+    "title": {
+        "en": "Activate mode for, then revert in group",
+        "nl": "Activeer stand voor, daarna terug in groep",
+        "de": "Modus aktivieren für, dann zurück in Gruppe",
+        "fr": "Activer le mode pendant, puis revenir dans un groupe",
+        "it": "Attiva modalità per, poi ripristina in un gruppo",
+        "sv": "Aktivera läge i, återgå sedan i grupp",
+        "no": "Aktiver modus i, deretter tilbake i gruppe",
+        "es": "Activar modo durante, luego revertir en un grupo",
+        "da": "Aktivér tilstand i, vend derefter tilbage i gruppe",
+        "ru": "Активировать режим на время, затем вернуть в группе",
+        "pl": "Aktywuj tryb na, potem przywróć w grupie",
+        "ko": "그룹에서 모드를 일정 시간 활성화 후 되돌리기",
+        "ar": "تفعيل الوضع لمدة ثم العودة في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Activate mode [[name]] for [[duration]] [[unit]], then revert in [[group]]",
+        "nl": "Activeer stand [[name]] voor [[duration]] [[unit]], daarna terug in [[group]]",
+        "de": "Aktiviere Modus [[name]] für [[duration]] [[unit]], dann zurück in [[group]]",
+        "fr": "Activer le mode [[name]] pendant [[duration]] [[unit]], puis revenir dans [[group]]",
+        "it": "Attiva modalità [[name]] per [[duration]] [[unit]], poi ripristina in [[group]]",
+        "sv": "Aktivera läge [[name]] i [[duration]] [[unit]], återgå sedan i [[group]]",
+        "no": "Aktiver modus [[name]] i [[duration]] [[unit]], deretter tilbake i [[group]]",
+        "es": "Activar modo [[name]] durante [[duration]] [[unit]], luego revertir en [[group]]",
+        "da": "Aktivér tilstand [[name]] i [[duration]] [[unit]], vend derefter tilbage i [[group]]",
+        "ru": "Активировать режим [[name]] на [[duration]] [[unit]], затем вернуть в [[group]]",
+        "pl": "Aktywuj tryb [[name]] na [[duration]] [[unit]], potem przywróć w [[group]]",
+        "ko": "[[group]]에서 모드 [[name]]를 [[duration]] [[unit]] 동안 활성화 후 되돌리기",
+        "ar": "تفعيل الوضع [[name]] لمدة [[duration]] [[unit]] ثم العودة في [[group]]"
+    },
+    "hint": {
+        "en": "Activates a defined mode for a specified duration, then restores the previously active mode. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Activeert een gedefinieerde stand voor een opgegeven duur en herstelt daarna de vorige actieve stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Aktiviert einen definierten Modus für eine angegebene Dauer und stellt danach den zuvor aktiven Modus wieder her. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Active un mode défini pendant une durée spécifiée, puis restaure le mode précédemment actif. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Attiva una modalità definita per una durata specificata, poi ripristina la modalità precedentemente attiva. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Aktiverar ett definierat läge under en angiven tid och återställer sedan det tidigare aktiva läget. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Aktiverer en definert modus i en angitt varighet og gjenoppretter deretter den forrige aktive modusen. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Activa un modo definido durante una duración especificada y luego restaura el modo activo anterior. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Aktiverer en defineret tilstand i en angivet varighed og gendanner derefter den tidligere aktive tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Активирует определенный режим на указанную продолжительность, затем восстанавливает ранее активный режим. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Aktywuje zdefiniowany tryb na określony czas, a następnie przywraca poprzednio aktywny tryb. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "정의된 모드를 지정된 기간 동안 활성화한 후 이전에 활성화된 모드를 복원합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يفعّل وضعاً محدداً لمدة محددة ثم يستعيد الوضع النشط السابق. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        },
+        {
+            "type": "number",
+            "name": "duration",
+            "min": 1,
+            "step": 1,
+            "title": {
+                "en": "Duration",
+                "nl": "Looptijd",
+                "de": "Dauer",
+                "fr": "Durée",
+                "it": "Durata",
+                "sv": "Varaktighet",
+                "no": "Varighet",
+                "es": "Duración",
+                "da": "Varighed",
+                "ru": "Длительность",
+                "pl": "Czas trwania",
+                "ko": "지속 시간",
+                "ar": "المدة"
+            },
+            "placeholder": {
+                "en": "E.g. 10",
+                "nl": "Bijv. 10",
+                "de": "Z. B. 10",
+                "fr": "P. ex. 10",
+                "it": "Es. 10",
+                "sv": "T.ex. 10",
+                "no": "F.eks. 10",
+                "es": "P. ej. 10",
+                "da": "F.eks. 10",
+                "ru": "Напр. 10",
+                "pl": "Np. 10",
+                "ko": "예: 10",
+                "ar": "مثال: 10"
+            }
+        },
+        {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+                "en": "Unit",
+                "nl": "Eenheid",
+                "de": "Einheit",
+                "fr": "Unité",
+                "it": "Unità",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Unidad",
+                "da": "Enhed",
+                "ru": "Единица",
+                "pl": "Jednostka",
+                "ko": "단위",
+                "ar": "الوحدة"
+            },
+            "values": [
+                {
+                    "id": "milliseconds",
+                    "title": {
+                        "en": "milliseconds",
+                        "nl": "milliseconden",
+                        "de": "Millisekunden",
+                        "fr": "millisecondes",
+                        "it": "millisecondi",
+                        "sv": "millisekunder",
+                        "no": "millisekunder",
+                        "es": "milisegundos",
+                        "da": "millisekunder",
+                        "ru": "миллисекунды",
+                        "pl": "milisekundy",
+                        "ko": "밀리초",
+                        "ar": "ميلي ثانية"
+                    }
+                },
+                {
+                    "id": "seconds",
+                    "title": {
+                        "en": "seconds",
+                        "nl": "seconden",
+                        "de": "Sekunden",
+                        "fr": "secondes",
+                        "it": "secondi",
+                        "sv": "sekunder",
+                        "no": "sekunder",
+                        "es": "segundos",
+                        "da": "sekunder",
+                        "ru": "секунды",
+                        "pl": "sekundy",
+                        "ko": "초",
+                        "ar": "ثواني"
+                    }
+                },
+                {
+                    "id": "minutes",
+                    "title": {
+                        "en": "minutes",
+                        "nl": "minuten",
+                        "de": "Minuten",
+                        "fr": "minutes",
+                        "it": "minuti",
+                        "sv": "minuter",
+                        "no": "minutter",
+                        "es": "minutos",
+                        "da": "minutter",
+                        "ru": "минуты",
+                        "pl": "minuty",
+                        "ko": "분",
+                        "ar": "دقائق"
+                    }
+                },
+                {
+                    "id": "hours",
+                    "title": {
+                        "en": "hours",
+                        "nl": "uren",
+                        "de": "Stunden",
+                        "fr": "heures",
+                        "it": "ore",
+                        "sv": "timmar",
+                        "no": "timer",
+                        "es": "horas",
+                        "da": "timer",
+                        "ru": "часы",
+                        "pl": "godziny",
+                        "ko": "시간",
+                        "ar": "ساعات"
+                    }
+                },
+                {
+                    "id": "days",
+                    "title": {
+                        "en": "days",
+                        "nl": "dagen",
+                        "de": "Tage",
+                        "fr": "jours",
+                        "it": "giorni",
+                        "sv": "dagar",
+                        "no": "dager",
+                        "es": "días",
+                        "da": "dage",
+                        "ru": "дни",
+                        "pl": "dni",
+                        "ko": "일",
+                        "ar": "أيام"
+                    }
+                }
+            ]
+        }
+    ]
+}

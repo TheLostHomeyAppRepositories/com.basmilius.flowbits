@@ -1,7 +1,7 @@
 import type { Color, Icon } from '@basmilius/homey-common';
 import { provide, type Ref, ref } from 'vue';
 import { COLORS, ICONS } from './symbols';
-import type { BitSet, Event, FeatureType, Flag, FormLook, Item, Label, Mode, Statistics, Timer } from './types';
+import type { BitSet, Event, FeatureType, Flag, FormLook, Item, Label, ModeGroup, Statistics, Timer } from './types';
 
 const EMPTY_STATISTICS: Statistics = {
     currentFlags: [],
@@ -75,8 +75,8 @@ export function useLabels() {
     return composeList<Label>('/labels');
 }
 
-export function useModes() {
-    return composeList<Mode>('/modes');
+export function useModeGroups() {
+    return composeList<ModeGroup>('/mode-groups');
 }
 
 export function useSets() {
@@ -128,14 +128,15 @@ export function composeList<T>(endpoint: string) {
     };
 }
 
-export function composeSave(endpoint: string, editingItem: Ref<Item | null>, editingType: Ref<FeatureType | null>, isSaving: Ref<boolean>, fn: () => Promise<void>) {
+export function composeSave(endpoint: string, editingItem: Ref<Item | null>, editingType: Ref<FeatureType | null>, isSaving: Ref<boolean>, fn: () => Promise<void>, extra?: () => Record<string, unknown>) {
     return async (name: string, look: FormLook) => {
         isSaving.value = true;
 
         await Homey.api('POST', endpoint, {
             name,
             color: look.color,
-            icon: look.icon
+            icon: look.icon,
+            ...extra?.()
         });
 
         await fn();

@@ -9,6 +9,15 @@
 
     <title>Settings</title>
 
+    <script type="text/javascript">
+        // A module script is always deferred, so homey.js can call onHomeyReady before the
+        // bundle has run and defined it. Capturing the call here closes that race: the app
+        // waits on this promise and gets the handover whichever side is ready first.
+        window.homeyReady = new Promise(resolve => {
+            window.onHomeyReady = resolve;
+        });
+    </script>
+
     <script
         type="text/javascript"
         src="/homey.js"

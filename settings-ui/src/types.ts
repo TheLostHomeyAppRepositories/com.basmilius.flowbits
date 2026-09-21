@@ -9,6 +9,7 @@ export type {
     Label,
     Look,
     Mode,
+    ModeGroup,
     NoRepeatWindow,
     Slider,
     Statistics,
@@ -32,4 +33,7 @@ export type Item = {
     name: string;
     color: string | undefined;
     icon: string | undefined;
+
+    /** Secondary label shown at the end of the row. Modes use it for their group. */
+    caption?: string;
 };

@@ -10,12 +10,16 @@
     "set_state_new": "이 플로우에 새로운 세트 상태, 플로우 저장 후 알려집니다",
     "signal_new": "이 플로우에 새로운 신호",
     "slider_new": "이 플로우의 새 슬라이더",
-    "timer_new": "이 플로우에 새로운 타이머"
+    "timer_new": "이 플로우에 새로운 타이머",
+    "mode_group_new": "이 플로우의 새 그룹",
+    "mode_group_mode_new": "이 그룹의 새 모드입니다. 플로우를 저장하면 인식됩니다"
   },
   "notification": {
     "mode_activated": "**__name__** 활성화됨.",
     "mode_deactivated": "**__name__** 비활성화됨.",
-    "welcome": "**FlowBits**에 오신 것을 환영합니다! flowbits.nl을 방문하여 FlowBits로 할 수 있는 작업에 대해 자세히 알아보세요."
+    "welcome": "**FlowBits**에 오신 것을 환영합니다! flowbits.nl을 방문하여 FlowBits로 할 수 있는 작업에 대해 자세히 알아보세요.",
+    "mode_group_activated": "**__group__**에서 **__name__**이(가) 활성화되었습니다.",
+    "mode_group_deactivated": "**__group__**에서 **__name__**이(가) 비활성화되었습니다."
   },
   "token": {
     "day_period": "시간대 (원본)",
@@ -105,7 +109,7 @@
     },
     "modes": {
       "title": "모드",
-      "description": "한 번에 하나의 모드만 활성화될 수 있습니다. 플로우 내 작업, 조건, 트리거를 사용해 모드를 생성하고 관리하세요.",
+      "description": "한 그룹 안에서는 한 번에 하나의 모드만 활성화됩니다. 플로우의 모드 액션, 조건, 트리거로 모드를 만들고 관리하세요.",
       "empty": "아직 생성된 모드가 없습니다."
     },
     "sets": {
@@ -133,7 +137,8 @@
     },
     "card_statistics": {
       "title": "플로우 카드 통계",
-      "description": "개별 플로우 카드의 사용 통계입니다."
+      "description": "개별 플로우 카드의 사용 통계입니다.",
+      "open": "플로우 카드 통계 보기"
     },
     "documentation": {
       "title": "문서",

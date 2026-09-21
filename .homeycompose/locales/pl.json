@@ -10,12 +10,16 @@
         "set_state_new": "Nowy stan set w tym przepływie, zostanie zidentyfikowany po zapisaniu przepływu",
         "signal_new": "Nowy sygnał w tym przepływie",
         "slider_new": "Nowy suwak w tym przepływie",
-        "timer_new": "Nowy timer w tym przepływie"
+        "timer_new": "Nowy timer w tym przepływie",
+        "mode_group_new": "Nowa grupa w tym przepływie",
+        "mode_group_mode_new": "Nowy tryb w tej grupie, będzie znany po zapisaniu przepływu"
     },
     "notification": {
         "mode_activated": "**__name__** jest aktywowany.",
         "mode_deactivated": "**__name__** jest dezaktywowany.",
-        "welcome": "Witamy w **FlowBits**! Przejdź do flowbits.nl, aby dowiedzieć się więcej o tym, co możesz zrobić z FlowBits."
+        "welcome": "Witamy w **FlowBits**! Przejdź do flowbits.nl, aby dowiedzieć się więcej o tym, co możesz zrobić z FlowBits.",
+        "mode_group_activated": "**__name__** jest aktywowany w **__group__**.",
+        "mode_group_deactivated": "**__name__** jest dezaktywowany w **__group__**."
     },
     "token": {
         "day_period": "Część dnia (surowa)",
@@ -109,7 +113,7 @@
         },
         "modes": {
             "title": "Tryby",
-            "description": "Tylko jeden tryb może być aktywny w danym momencie. Twórz i zarządzaj trybami za pomocą akcji, warunków i wyzwalaczy.",
+            "description": "W obrębie grupy tylko jeden tryb może być aktywny naraz. Twórz tryby i zarządzaj nimi za pomocą akcji, warunków i wyzwalaczy trybu w swoich przepływach.",
             "empty": "Nie utworzono jeszcze żadnych trybów."
         },
         "sets": {
@@ -137,7 +141,8 @@
         },
         "card_statistics": {
             "title": "Statystyki kart przepływów",
-            "description": "To są statystyki użycia dla poszczególnych kart przepływów."
+            "description": "To są statystyki użycia dla poszczególnych kart przepływów.",
+            "open": "Pokaż statystyki kart"
         }
     },
     "color": {

@@ -1,0 +1,90 @@
+{
+    "id": "mode_group_current_changed",
+    "title": {
+        "en": "The current mode changed in group",
+        "nl": "De huidige stand is gewijzigd in groep",
+        "de": "Der aktuelle Modus wurde geändert in Gruppe",
+        "fr": "Le mode actuel a changé dans un groupe",
+        "it": "La modalità attuale è cambiata in un gruppo",
+        "sv": "Det aktuella läget har ändrats i grupp",
+        "no": "Den nåværende modusen har endret seg i gruppe",
+        "es": "El modo actual ha cambiado en un grupo",
+        "da": "Den nuværende tilstand er blevet ændret i gruppe",
+        "ru": "Текущий режим был изменён в группе",
+        "pl": "Aktualny tryb został zmieniony w grupie",
+        "ko": "그룹에서 현재 모드가 변경되었습니다",
+        "ar": "تم تغيير الوضع الحالي في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "The current mode changed in [[group]]",
+        "nl": "De huidige stand is gewijzigd in [[group]]",
+        "de": "Der aktuelle Modus wurde geändert in [[group]]",
+        "fr": "Le mode actuel a changé dans [[group]]",
+        "it": "La modalità attuale è cambiata in [[group]]",
+        "sv": "Det aktuella läget har ändrats i [[group]]",
+        "no": "Den nåværende modusen har endret seg i [[group]]",
+        "es": "El modo actual ha cambiado en [[group]]",
+        "da": "Den nuværende tilstand er blevet ændret i [[group]]",
+        "ru": "Текущий режим был изменён в [[group]]",
+        "pl": "Aktualny tryb został zmieniony w [[group]]",
+        "ko": "[[group]]에서 현재 모드가 변경되었습니다",
+        "ar": "تم تغيير الوضع الحالي في [[group]]"
+    },
+    "hint": {
+        "en": "Triggers when the current mode is changed. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Triggert wanneer de huidige stand is gewijzigd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Wird ausgelöst, wenn der aktuelle Modus geändert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Se déclenche lorsque le mode actuel est modifié. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Attiva quando la modalità attuale viene modificata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Utlöses när det aktuella läget ändras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Utløses når den nåværende modusen endres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Se activa cuando el modo actual cambia. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Udløses, når den nuværende tilstand ændres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Срабатывает, когда текущий режим изменяется. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Wyzwalane, gdy aktualny tryb zostaje zmieniony. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "현재 모드가 변경될 때 트리거됩니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتم تشغيله عند تغيير الوضع الحالي. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "tokens": [
+        {
+            "name": "mode",
+            "type": "string",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ],
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        }
+    ]
+}

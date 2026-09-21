@@ -1,0 +1,109 @@
+{
+    "id": "mode_group_changed",
+    "title": {
+        "en": "Mode changed in group",
+        "nl": "Stand gewijzigd in groep",
+        "de": "Modus geändert in Gruppe",
+        "fr": "Mode changé dans un groupe",
+        "it": "Modalità modificata in un gruppo",
+        "sv": "Läge ändrat i grupp",
+        "no": "Modus endret i gruppe",
+        "es": "Modo cambiado en un grupo",
+        "da": "Tilstand ændret i gruppe",
+        "ru": "Режим изменён в группе",
+        "pl": "Tryb zmieniony w grupie",
+        "ko": "그룹에서 모드 변경됨",
+        "ar": "الوضع تغيّر في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Mode [[name]] changed in [[group]]",
+        "nl": "Stand [[name]] gewijzigd in [[group]]",
+        "de": "Modus [[name]] geändert in [[group]]",
+        "fr": "Mode [[name]] changé dans [[group]]",
+        "it": "Modalità [[name]] modificata in [[group]]",
+        "sv": "Läge [[name]] ändrat i [[group]]",
+        "no": "Modus [[name]] endret i [[group]]",
+        "es": "Modo [[name]] cambiado en [[group]]",
+        "da": "Tilstand [[name]] ændret i [[group]]",
+        "ru": "Режим [[name]] изменён в [[group]]",
+        "pl": "Tryb [[name]] zmieniony w [[group]]",
+        "ko": "[[group]]에서 모드 [[name]] 변경됨",
+        "ar": "الوضع [[name]] تغيّر في [[group]]"
+    },
+    "hint": {
+        "en": "Triggers when a mode is activated or deactivated. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Triggert wanneer een stand wordt geactiveerd of gedeactiveerd. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Löst aus, wenn ein Modus aktiviert oder deaktiviert wird. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Se déclenche lorsqu’un mode est activé ou désactivé. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Si attiva quando una modalità viene attivata o disattivata. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Utlöses när ett läge aktiveras eller deaktiveras. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Utløses når en modus aktiveres eller deaktiveres. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Se activa cuando un modo se activa o desactiva. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Udløses når en tilstand aktiveres eller deaktiveres. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Срабатывает при активации или деактивации режима. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Wyzwalane, gdy tryb zostaje aktywowany lub dezaktywowany. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "모드가 활성화되거나 비활성화될 때 트리거됨. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يتم التفعيل عند تفعيل أو إلغاء تفعيل وضع. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ],
+    "tokens": [
+        {
+            "name": "active",
+            "type": "boolean",
+            "title": {
+                "en": "Active",
+                "nl": "Actief",
+                "de": "Aktiv",
+                "fr": "Actif",
+                "it": "Attivo",
+                "sv": "Aktiv",
+                "no": "Aktiv",
+                "es": "Activo",
+                "da": "Aktiv",
+                "ru": "Активный",
+                "pl": "Aktywny",
+                "ko": "활성",
+                "ar": "نشط"
+            }
+        }
+    ]
+}

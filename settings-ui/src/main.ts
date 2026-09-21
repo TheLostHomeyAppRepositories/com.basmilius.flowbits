@@ -1,8 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
-// @ts-ignore
-window.onHomeyReady = function (): void {
+window.homeyReady.then(() => {
     createApp(App)
         .mount('#app');
-};
+});

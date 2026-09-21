@@ -10,12 +10,16 @@
         "set_state_new": "Nuovo stato set in questo flusso, sarà noto dopo il salvataggio del flusso",
         "signal_new": "Nuovo segnale in questo flusso",
         "slider_new": "Nuovo slider in questo flusso",
-        "timer_new": "Nuovo timer in questo flusso"
+        "timer_new": "Nuovo timer in questo flusso",
+        "mode_group_new": "Nuovo gruppo in questo flusso",
+        "mode_group_mode_new": "Nuova modalità in questo gruppo, sarà nota dopo il salvataggio del flusso"
     },
     "notification": {
         "mode_activated": "**__name__** è attivato.",
         "mode_deactivated": "**__name__** è disattivato.",
-        "welcome": "Benvenuto su **FlowBits**! Visita flowbits.nl per saperne di più su cosa puoi fare con FlowBits."
+        "welcome": "Benvenuto su **FlowBits**! Visita flowbits.nl per saperne di più su cosa puoi fare con FlowBits.",
+        "mode_group_activated": "**__name__** è attivata in **__group__**.",
+        "mode_group_deactivated": "**__name__** è disattivata in **__group__**."
     },
     "token": {
         "day_period": "Periodo del giorno (raw)",
@@ -109,7 +113,7 @@
         },
         "modes": {
             "title": "Modalità",
-            "description": "Solo una modalità può essere attiva alla volta. Crea e gestisci le modalità tramite azioni, condizioni e trigger nei tuoi flow.",
+            "description": "In un gruppo può essere attiva una sola modalità alla volta. Crea e gestisci le modalità con le azioni, condizioni e trigger di modalità nei tuoi flussi.",
             "empty": "Nessuna modalità è stata ancora creata."
         },
         "sets": {
@@ -137,7 +141,8 @@
         },
         "card_statistics": {
             "title": "Statistiche delle schede flow",
-            "description": "Queste sono statistiche di utilizzo per le singole schede flow."
+            "description": "Queste sono statistiche di utilizzo per le singole schede flow.",
+            "open": "Mostra le statistiche delle schede"
         }
     },
     "color": {

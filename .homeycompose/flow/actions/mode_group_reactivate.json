@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_reactivate",
+    "title": {
+        "en": "Reactivate mode in group",
+        "nl": "Activeer stand opnieuw in groep",
+        "de": "Modus erneut aktivieren in Gruppe",
+        "fr": "Réactiver le mode dans un groupe",
+        "it": "Riattiva modalità in un gruppo",
+        "sv": "Aktivera läge igen i grupp",
+        "no": "Aktiver modus på nytt i gruppe",
+        "es": "Reactivar modo en un grupo",
+        "da": "Genaktivér tilstand i gruppe",
+        "ru": "Повторно активировать режим в группе",
+        "pl": "Ponownie aktywuj tryb w grupie",
+        "ko": "그룹에서 모드를 다시 활성화",
+        "ar": "أعد تفعيل النمط في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Reactivate [[name]] in [[group]]",
+        "nl": "Activeer [[name]] opnieuw in [[group]]",
+        "de": "Aktiviere [[name]] erneut in [[group]]",
+        "fr": "Réactiver [[name]] dans [[group]]",
+        "it": "Riattiva [[name]] in [[group]]",
+        "sv": "Aktivera [[name]] igen i [[group]]",
+        "no": "Aktiver [[name]] på nytt i [[group]]",
+        "es": "Reactivar [[name]] en [[group]]",
+        "da": "Genaktivér [[name]] i [[group]]",
+        "ru": "Повторно активировать [[name]] в [[group]]",
+        "pl": "Ponownie aktywuj [[name]] w [[group]]",
+        "ko": "[[group]]에서 [[name]] 다시 활성화",
+        "ar": "أعد تفعيل [[name]] في [[group]]"
+    },
+    "hint": {
+        "en": "Re-triggers all 'mode is activated' cards. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Trigger alle 'stand is geactiveerd' kaarten opnieuw. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Löst alle 'Modus ist aktiviert'-Karten erneut aus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Relance toutes les cartes « mode est activé ». S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Riattiva tutte le schede « modalità è attivata ». Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Triggar alla 'läge är aktiverat'-kort igen. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Gjenutløser alle «modus er aktivert» kort. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Vuelve a activar todas las tarjetas «modo está activado». Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Gentrigger alle 'tilstand er aktiveret'-kort. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Повторно запускает все карточки «режим активирован». Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Ponownie wyzwala wszystkie karty «tryb jest aktywowany». Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "모든 '모드가 활성화되었습니다' 카드를 다시 트리거합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يعيد تفعيل جميع البطاقات \"تم تفعيل النمط\". ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ]
+}

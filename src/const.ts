@@ -21,12 +21,20 @@ export const SETTING_MODE_LOOKS = 'flowbits-mode-looks';
 export const SETTING_MODE_LAST_UPDATES = 'flowbits-mode-last-updates';
 export const SETTING_MODE_EXPIRES_AT = 'flowbits-mode-expires-at';
 export const SETTING_MODE_REVERT_TO = 'flowbits-mode-revert-to';
+export const SETTING_MODE_GROUPS_MIGRATED = 'flowbits-mode-groups-migrated';
 export const SETTING_NO_REPEAT_WINDOWS = 'flowbits-no-repeat-windows';
 export const SETTING_SETS = 'flowbits-sets';
 export const SETTING_SET_LOOKS = 'flowbits-set-looks';
 export const SETTING_SLIDERS = 'flowbits-sliders';
 export const SETTING_TIMER_LOOKS = 'flowbits-timer-looks';
 export const SETTING_TIMER_PREFIX = 'flowbits-timer:';
+
+/**
+ * Modes live in named groups so a home can run more than one independent mode axis.
+ * Everything that existed before groups belongs to this one. The colon makes a collision
+ * unlikely rather than impossible: a group card accepts any name that is typed into it.
+ */
+export const DEFAULT_MODE_GROUP = 'flowbits:default';
 
 export const EVENTS_HISTORY_LENGTH = 50;
 

@@ -1,0 +1,88 @@
+{
+    "id": "mode_group_deactivate",
+    "title": {
+        "en": "Deactivate mode in group",
+        "nl": "Deactiveer stand in groep",
+        "de": "Modus deaktivieren in Gruppe",
+        "fr": "Désactiver le mode dans un groupe",
+        "it": "Disattiva modalità in un gruppo",
+        "sv": "Inaktivera läge i grupp",
+        "no": "Deaktiver modus i gruppe",
+        "es": "Desactivar modo en un grupo",
+        "da": "Deaktivér tilstand i gruppe",
+        "ru": "Деактивировать режим в группе",
+        "pl": "Dezaktywuj tryb w grupie",
+        "ko": "그룹에서 모드 비활성화",
+        "ar": "إلغاء تنشيط الوضع في مجموعة"
+    },
+    "titleFormatted": {
+        "en": "Deactivate [[name]] in [[group]]",
+        "nl": "Deactiveer [[name]] in [[group]]",
+        "de": "Deaktiviere [[name]] in [[group]]",
+        "fr": "Désactiver [[name]] dans [[group]]",
+        "it": "Disattiva [[name]] in [[group]]",
+        "sv": "Inaktivera [[name]] i [[group]]",
+        "no": "Deaktiver [[name]] i [[group]]",
+        "es": "Desactivar [[name]] en [[group]]",
+        "da": "Deaktivér [[name]] i [[group]]",
+        "ru": "Деактивировать [[name]] в [[group]]",
+        "pl": "Dezaktywuj [[name]] w [[group]]",
+        "ko": "[[group]]에서 [[name]] 비활성화",
+        "ar": "إلغاء تنشيط [[name]] في [[group]]"
+    },
+    "hint": {
+        "en": "Deactivates a defined mode. Scoped to the chosen group, which runs independently of the other groups.",
+        "nl": "Deactiveer een gedefinieerde stand. Geldt binnen de gekozen groep, die los staat van de andere groepen.",
+        "de": "Deaktiviert einen definierten Modus. Gilt innerhalb der gewählten Gruppe, die unabhängig von den anderen Gruppen läuft.",
+        "fr": "Désactive un mode défini. S'applique au groupe choisi, qui fonctionne indépendamment des autres groupes.",
+        "it": "Disattiva una modalità definita. Si applica al gruppo scelto, che funziona indipendentemente dagli altri gruppi.",
+        "sv": "Inaktiverar ett definierat läge. Gäller den valda gruppen, som fungerar oberoende av de andra grupperna.",
+        "no": "Deaktiverer en definert modus. Gjelder den valgte gruppen, som fungerer uavhengig av de andre gruppene.",
+        "es": "Desactiva un modo definido. Se aplica al grupo elegido, que funciona de forma independiente de los demás grupos.",
+        "da": "Deaktiverer en defineret tilstand. Gælder den valgte gruppe, som fungerer uafhængigt af de andre grupper.",
+        "ru": "Деактивирует определенный режим. Действует в выбранной группе, которая работает независимо от других групп.",
+        "pl": "Dezaktywuje zdefiniowany tryb. Dotyczy wybranej grupy, która działa niezależnie od pozostałych grup.",
+        "ko": "정의된 모드를 비활성화합니다. 선택한 그룹에만 적용되며, 그룹은 서로 독립적으로 동작합니다.",
+        "ar": "يلغي تنشيط وضع معين. ينطبق على المجموعة المختارة، وهي تعمل بشكل مستقل عن المجموعات الأخرى."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "group",
+            "title": {
+                "en": "Group",
+                "nl": "Groep",
+                "de": "Gruppe",
+                "fr": "Groupe",
+                "it": "Gruppo",
+                "sv": "Grupp",
+                "no": "Gruppe",
+                "es": "Grupo",
+                "da": "Gruppe",
+                "ru": "Группа",
+                "pl": "Grupa",
+                "ko": "그룹",
+                "ar": "مجموعة"
+            }
+        },
+        {
+            "type": "autocomplete",
+            "name": "name",
+            "title": {
+                "en": "Mode",
+                "nl": "Stand",
+                "de": "Modus",
+                "fr": "Mode",
+                "it": "Modalità",
+                "sv": "Läge",
+                "no": "Modus",
+                "es": "Modo",
+                "da": "Tilstand",
+                "ru": "Режим",
+                "pl": "Tryb",
+                "ko": "모드",
+                "ar": "وضع"
+            }
+        }
+    ]
+}

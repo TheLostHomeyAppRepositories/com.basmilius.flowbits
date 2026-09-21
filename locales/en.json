@@ -10,12 +10,16 @@
     "set_state_new": "New set state in this flow, will be known after saving the flow",
     "signal_new": "New signal in this flow",
     "slider_new": "New slider in this flow",
-    "timer_new": "New timer in this flow"
+    "timer_new": "New timer in this flow",
+    "mode_group_new": "New group in this flow",
+    "mode_group_mode_new": "New mode in this group, will be known after saving the flow"
   },
   "notification": {
     "mode_activated": "**__name__** is activated.",
     "mode_deactivated": "**__name__** is deactivated.",
-    "welcome": "Welcome to **FlowBits**! Go to flowbits.nl to learn more about what you can do with FlowBits."
+    "welcome": "Welcome to **FlowBits**! Go to flowbits.nl to learn more about what you can do with FlowBits.",
+    "mode_group_activated": "**__name__** is activated in **__group__**.",
+    "mode_group_deactivated": "**__name__** is deactivated in **__group__**."
   },
   "token": {
     "day_period": "Day period (raw)",
@@ -105,7 +109,7 @@
     },
     "modes": {
       "title": "Modes",
-      "description": "Only one mode can be active at a time. Create and manage modes using mode actions, conditions, and triggers in your flows.",
+      "description": "Only one mode can be active at a time within its group. Create and manage modes using mode actions, conditions, and triggers in your flows.",
       "empty": "No modes have been created yet."
     },
     "sets": {
@@ -133,7 +137,8 @@
     },
     "card_statistics": {
       "title": "Flow card statistics",
-      "description": "These are usage statistics for individual flow cards."
+      "description": "These are usage statistics for individual flow cards.",
+      "open": "Show flow card statistics"
     },
     "documentation": {
       "title": "Documentation",

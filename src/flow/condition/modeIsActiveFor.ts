@@ -1,4 +1,5 @@
 import { condition, FlowConditionEntity } from '@basmilius/homey-common';
+import { DEFAULT_MODE_GROUP } from '../../const';
 import type { ClockUnit, FlowBitsApp } from '../../types';
 import { AutocompleteProviders } from '..';
 
@@ -11,7 +12,7 @@ export default class extends FlowConditionEntity<FlowBitsApp, Args, never> {
     }
 
     async onRun(args: Args): Promise<boolean> {
-        return this.app.modes.isActiveFor(args.name.name, args.duration, args.unit);
+        return this.app.modes.isActiveFor(DEFAULT_MODE_GROUP, args.name.name, args.duration, args.unit);
     }
 
     async onUpdate(): Promise<void> {
