@@ -1,0 +1,107 @@
+{
+    "id": "flag_activate_until",
+    "title": {
+        "en": "Activate flag until",
+        "nl": "Activeer flag tot",
+        "de": "Flag aktivieren bis",
+        "fr": "Activer le flag jusqu'à",
+        "it": "Attiva flag fino a",
+        "sv": "Aktivera flagga till",
+        "no": "Aktiver flagg til",
+        "es": "Activar flag hasta",
+        "da": "Aktivér flag indtil",
+        "ru": "Активировать флаг до",
+        "pl": "Aktywuj flagę do",
+        "ko": "플래그를 다음 시점까지 활성화",
+        "ar": "تفعيل العلم حتى"
+    },
+    "titleFormatted": {
+        "en": "Activate flag [[flag]] until [[date]] [[time]]",
+        "nl": "Activeer flag [[flag]] tot [[date]] [[time]]",
+        "de": "Aktiviere Flag [[flag]] bis [[date]] [[time]]",
+        "fr": "Activer le flag [[flag]] jusqu'à [[date]] [[time]]",
+        "it": "Attiva flag [[flag]] fino a [[date]] [[time]]",
+        "sv": "Aktivera flagga [[flag]] till [[date]] [[time]]",
+        "no": "Aktiver flagg [[flag]] til [[date]] [[time]]",
+        "es": "Activar flag [[flag]] hasta [[date]] [[time]]",
+        "da": "Aktivér flag [[flag]] indtil [[date]] [[time]]",
+        "ru": "Активировать флаг [[flag]] до [[date]] [[time]]",
+        "pl": "Aktywuj flagę [[flag]] do [[date]] [[time]]",
+        "ko": "플래그 [[flag]]를 [[date]] [[time]]까지 활성화",
+        "ar": "تفعيل العلم [[flag]] حتى [[date]] [[time]]"
+    },
+    "hint": {
+        "en": "Activates a defined flag until the given date and time.",
+        "nl": "Activeert een gedefinieerde flag tot de opgegeven datum en tijd.",
+        "de": "Aktiviert einen definierten Flag bis zum angegebenen Datum und der angegebenen Uhrzeit.",
+        "fr": "Active un flag défini jusqu'à la date et l'heure indiquées.",
+        "it": "Attiva un flag definito fino alla data e all'ora indicate.",
+        "sv": "Aktiverar en definierad flagga till angivet datum och tid.",
+        "no": "Aktiverer et definert flagg til angitt dato og klokkeslett.",
+        "es": "Activa un flag definido hasta la fecha y hora indicadas.",
+        "da": "Aktiverer et defineret flag indtil den angivne dato og tid.",
+        "ru": "Активирует определенный флаг до указанной даты и времени.",
+        "pl": "Aktywuje zdefiniowaną flagę do podanej daty i godziny.",
+        "ko": "정의된 플래그를 지정된 날짜와 시간까지 활성화합니다.",
+        "ar": "يفعّل علماً محدداً حتى التاريخ والوقت المحددين."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "flag",
+            "title": {
+                "en": "Flag",
+                "nl": "Flag",
+                "de": "Flag",
+                "fr": "Flag",
+                "it": "Flag",
+                "sv": "Flagga",
+                "no": "Flagg",
+                "es": "Flag",
+                "da": "Flag",
+                "ru": "Флаг",
+                "pl": "Flaga",
+                "ko": "플래그",
+                "ar": "علم"
+            }
+        },
+        {
+            "type": "date",
+            "name": "date",
+            "title": {
+                "en": "Date",
+                "nl": "Datum",
+                "de": "Datum",
+                "fr": "Date",
+                "it": "Data",
+                "sv": "Datum",
+                "no": "Dato",
+                "es": "Fecha",
+                "da": "Dato",
+                "ru": "Дата",
+                "pl": "Data",
+                "ko": "날짜",
+                "ar": "التاريخ"
+            }
+        },
+        {
+            "type": "time",
+            "name": "time",
+            "title": {
+                "en": "Time",
+                "nl": "Tijd",
+                "de": "Uhrzeit",
+                "fr": "Heure",
+                "it": "Ora",
+                "sv": "Tid",
+                "no": "Tid",
+                "es": "Hora",
+                "da": "Tidspunkt",
+                "ru": "Время",
+                "pl": "Godzina",
+                "ko": "시간",
+                "ar": "الوقت"
+            }
+        }
+    ]
+}

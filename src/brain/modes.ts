@@ -1,11 +1,11 @@
 import { DateTime, Shortcuts } from '@basmilius/homey-common';
-import { MAX_TIMEOUT_MS, REALTIME_MODE_UPDATE, SETTING_MODE, SETTING_MODE_LAST_UPDATES, SETTING_MODE_LOOKS } from '../const';
+import { MAX_TIMEOUT_MS, REALTIME_MODE_UPDATE, SETTING_MODE, SETTING_MODE_EXPIRES_AT, SETTING_MODE_LAST_UPDATES, SETTING_MODE_LOOKS, SETTING_MODE_REVERT_TO } from '../const';
 import { AutocompleteProviders, Triggers } from '../flow';
 import type { ClockUnit, Feature, FlowBitsApp, Look, Mode, Styleable } from '../types';
 import { convertDurationToMs } from '../util';
 
 export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mode>, Styleable {
-    #deactivationTimeout: NodeJS.Timeout | null = null;
+    #expirationTimeout: NodeJS.Timeout | null = null;
 
     get currentMode(): string | null {
         return this.settings.get(SETTING_MODE);
@@ -13,6 +13,24 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
 
     set currentMode(value: string | null) {
         this.settings.set(SETTING_MODE, value);
+    }
+
+    get expiresAt(): DateTime | null {
+        const value = this.settings.get(SETTING_MODE_EXPIRES_AT);
+
+        return value ? DateTime.fromISO(value) : null;
+    }
+
+    set expiresAt(value: DateTime | null) {
+        this.settings.set(SETTING_MODE_EXPIRES_AT, value?.toISO() ?? null);
+    }
+
+    get revertTo(): string | null {
+        return this.settings.get(SETTING_MODE_REVERT_TO) ?? null;
+    }
+
+    set revertTo(value: string | null) {
+        this.settings.set(SETTING_MODE_REVERT_TO, value);
     }
 
     get looks(): Record<string, Look> {
@@ -43,6 +61,10 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         ));
     }
 
+    async initialize(): Promise<void> {
+        await this.#scheduleExpiration();
+    }
+
     async cleanup(): Promise<void> {
         this.log('Cleaning up unused modes...');
 
@@ -52,6 +74,12 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
 
         if (this.currentMode && !defined.find(d => d.name === this.currentMode)) {
             this.currentMode = null;
+            this.expiresAt = null;
+            this.revertTo = null;
+        }
+
+        if (this.revertTo && !defined.find(d => d.name === this.revertTo)) {
+            this.revertTo = null;
         }
 
         for (const key of Object.keys(this.looks)) {
@@ -74,6 +102,8 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
 
         this.looks = looks;
         this.lastUpdates = lastUpdates;
+
+        await this.#scheduleExpiration();
     }
 
     async count(): Promise<number> {
@@ -116,18 +146,18 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
     async activate(name: string): Promise<void> {
         const current = this.currentMode;
 
-        if (!name || current === name) {
+        if (!name) {
             return;
         }
 
-        // Clear any existing timeout
-        this.#clearModeTimeout();
+        // An open-ended activation cancels any pending timed deactivation or revert.
+        this.#clearExpiration();
+
+        if (current === name) {
+            return;
+        }
 
         this.currentMode = name;
-
-        if (current !== null) {
-            await this.#triggerDeactivated(current);
-        }
 
         const now = DateTime.now();
         const updates = {...this.lastUpdates, [name]: now};
@@ -141,8 +171,15 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
 
         this.log(`Activate mode ${name}.`);
 
+        // Emit the UI update first so widgets reflect the switch immediately,
+        // instead of waiting on the (potentially slow) timeline notifications below.
+        await this.#triggerRealtime();
+
+        if (current !== null) {
+            await this.#triggerDeactivated(current);
+        }
+
         await Promise.allSettled([
-            this.#triggerRealtime(),
             this.#triggerActivated(name),
             this.#triggerChanged(name, true)
         ]);
@@ -155,8 +192,7 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
             return;
         }
 
-        // Clear any existing timeout
-        this.#clearModeTimeout();
+        this.#clearExpiration();
 
         this.currentMode = null;
         this.lastUpdates = {
@@ -178,8 +214,7 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
             return;
         }
 
-        // Clear any existing timeout
-        this.#clearModeTimeout();
+        this.#clearExpiration();
 
         this.currentMode = name;
         this.lastUpdates = {
@@ -220,16 +255,40 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
             return;
         }
 
-        // Clear any existing timeout
-        this.#clearModeTimeout();
-
-        // Activate the mode
+        // Activate the mode (clears any previous expiration/revert)
         await this.activate(name);
 
-        // Schedule deactivation
-        this.#scheduleDeactivation(name, duration, unit);
+        // Schedule plain deactivation; no mode is restored afterwards.
+        this.expiresAt = DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)});
+        this.revertTo = null;
+
+        await this.#scheduleExpiration();
 
         this.log(`Activated mode ${name} for ${duration} ${unit}.`);
+    }
+
+    async activateForRevert(name: string, duration: number, unit: ClockUnit): Promise<void> {
+        if (!name) {
+            return;
+        }
+
+        // Remember the mode that was active before switching, so it can be restored.
+        const previous = this.currentMode;
+
+        // Activate the mode (clears any previous expiration/revert)
+        await this.activate(name);
+
+        if (previous === name) {
+            this.log(`Mode ${name} was already active, so there is nothing to revert to.`);
+            return;
+        }
+
+        this.expiresAt = DateTime.now().plus({milliseconds: convertDurationToMs(duration, unit)});
+        this.revertTo = previous;
+
+        await this.#scheduleExpiration();
+
+        this.log(`Activated mode ${name} for ${duration} ${unit}, reverting to ${previous ?? 'no mode'} afterwards.`);
     }
 
     async isActiveFor(name: string, duration: number, unit: ClockUnit): Promise<boolean> {
@@ -288,20 +347,73 @@ export default class Modes extends Shortcuts<FlowBitsApp> implements Feature<Mod
         await this.#triggerRealtime();
     }
 
-    #clearModeTimeout(): void {
-        if (this.#deactivationTimeout) {
-            this.clearTimeout(this.#deactivationTimeout);
-            this.#deactivationTimeout = null;
+    #clearExpiration(): void {
+        if (this.#expirationTimeout) {
+            this.clearTimeout(this.#expirationTimeout);
+            this.#expirationTimeout = null;
+        }
+
+        if (this.expiresAt !== null) {
+            this.expiresAt = null;
+        }
+
+        if (this.revertTo !== null) {
+            this.revertTo = null;
         }
     }
 
-    #scheduleDeactivation(name: string, duration: number, unit: ClockUnit): void {
-        const ms = Math.min(convertDurationToMs(duration, unit), MAX_TIMEOUT_MS);
+    async #scheduleExpiration(): Promise<void> {
+        if (this.#expirationTimeout) {
+            this.clearTimeout(this.#expirationTimeout);
+            this.#expirationTimeout = null;
+        }
 
-        this.#deactivationTimeout = this.setTimeout(async () => {
-            this.#deactivationTimeout = null;
-            await this.deactivate(name);
-        }, ms);
+        const current = this.currentMode;
+        const expiresAt = this.expiresAt;
+
+        if (!current || !expiresAt) {
+            return;
+        }
+
+        const diff = expiresAt.diff(DateTime.now()).as('milliseconds');
+
+        if (diff <= 0) {
+            await this.#processExpiration();
+            return;
+        }
+
+        const delay = Math.min(diff, MAX_TIMEOUT_MS);
+
+        this.#expirationTimeout = this.setTimeout(async () => {
+            this.#expirationTimeout = null;
+            await this.#processExpiration();
+        }, delay);
+
+        this.log(`Scheduled mode expiration check in ${Math.round(delay / 1000)}s.`);
+    }
+
+    async #processExpiration(): Promise<void> {
+        const current = this.currentMode;
+        const expiresAt = this.expiresAt;
+
+        if (!current || !expiresAt) {
+            return;
+        }
+
+        // Safety net: the timeout may have fired early due to the MAX_TIMEOUT_MS cap.
+        if (expiresAt > DateTime.now()) {
+            await this.#scheduleExpiration();
+            return;
+        }
+
+        const revertTo = this.revertTo;
+
+        if (revertTo) {
+            // Restore the previously active mode instead of leaving no mode active.
+            await this.activate(revertTo);
+        } else {
+            await this.deactivate(current);
+        }
     }
 
     async #triggerActivated(name: string): Promise<void> {

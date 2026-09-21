@@ -80,6 +80,8 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
             );
 
             await Promise.allSettled([
+                this.flags.initialize(),
+                this.modes.initialize(),
                 this.sets.initialize(),
                 this.timers.initialize(),
                 this.tokens.initialize(),
@@ -107,12 +109,14 @@ export default class FlowBitsApp extends App<FlowBitsApp> {
         this.registry.action(Actions.EventTriggerWithValue);
         this.registry.action(Actions.FlagActivate);
         this.registry.action(Actions.FlagActivateFor);
+        this.registry.action(Actions.FlagActivateUntil);
         this.registry.action(Actions.FlagDeactivate);
         this.registry.action(Actions.FlagToggle);
         this.registry.action(Actions.LabelClear);
         this.registry.action(Actions.LabelSet);
         this.registry.action(Actions.ModeActivate);
         this.registry.action(Actions.ModeActivateFor);
+        this.registry.action(Actions.ModeActivateForRevert);
         this.registry.action(Actions.ModeDeactivate);
         this.registry.action(Actions.ModeReactivate);
         this.registry.action(Actions.ModeReactivateCurrent);
