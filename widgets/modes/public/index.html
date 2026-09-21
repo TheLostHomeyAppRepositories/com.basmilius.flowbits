@@ -19,6 +19,7 @@
         let lastResult = null;
         let ready = false;
         let busy = false;
+        let updateSequence = 0;
 
         async function init() {
             Homey.on('flowbits-mode-update', update);
@@ -49,19 +50,32 @@
 
             button.classList.add('loading');
 
+            // The optimistic edit above made the DOM diverge from lastResult, so the
+            // next update has to rebuild instead of skipping on an unchanged result.
+            lastResult = null;
+
             try {
                 await Homey.api('POST', '/', {mode: mode.name});
-                // Re-sync with the actual server state regardless of realtime timing.
-                await update();
+            } catch (err) {
+                console.error('Switching mode failed.', err);
             } finally {
                 busy = false;
                 button.classList.remove('loading');
             }
+
+            // Re-sync with the actual server state, also when the call above failed.
+            await update();
         }
 
         async function update() {
+            const sequence = ++updateSequence;
             const results = await Homey.api('GET', '/');
             let elements = [];
+
+            // A later update already rendered a newer state; this response is stale.
+            if (sequence !== updateSequence) {
+                return;
+            }
 
             const resultsString = JSON.stringify(results);
 
