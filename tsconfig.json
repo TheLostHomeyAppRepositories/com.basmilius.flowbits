@@ -1,18 +1,5 @@
 {
-    "extends": "@tsconfig/node22/tsconfig.json",
-    "compilerOptions": {
-        "allowJs": false,
-        "experimentalDecorators": true,
-        "lib": [
-            "dom",
-            "es2023"
-        ],
-        "types": [
-            "node"
-        ],
-        "outDir": ".homeybuild/",
-        "resolveJsonModule": true
-    },
+    "extends": "@basmilius/homey-common/tsconfig.app.json",
     "exclude": [
         "docs",
         "settings-ui"
